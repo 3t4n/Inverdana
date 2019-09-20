@@ -90,7 +90,7 @@ SIMPLE_JWT = {
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'defaultdb',
+        'NAME': 'django',
         'USER': 'doadmin',
         'PASSWORD': 'fiwa4olc95p3kd8g',
         'HOST': 'dev-inverdana-db-do-user-6572351-0.db.ondigitalocean.com',
