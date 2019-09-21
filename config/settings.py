@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'rest_framework.authtoken',
+    'django.contrib.gis',
     ]
 
 MIDDLEWARE = [
@@ -89,7 +90,7 @@ SIMPLE_JWT = {
 
 DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'django',
         'USER': 'doadmin',
         'PASSWORD': 'fiwa4olc95p3kd8g',
