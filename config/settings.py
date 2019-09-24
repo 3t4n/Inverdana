@@ -84,6 +84,13 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
 }
+#DJOSER 
+#https://djoser.readthedocs.io/en/latest/settings.html
+DJOSER = {
+    'SERIALIZERS': {
+        'user': 'djoser.serializers.UserSerializer',
+        },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -91,7 +98,7 @@ SIMPLE_JWT = {
 DATABASES = {
         'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'django',
+        'NAME': 'profileModuleDev',
         'USER': 'doadmin',
         'PASSWORD': 'fiwa4olc95p3kd8g',
         'HOST': 'dev-inverdana-db-do-user-6572351-0.db.ondigitalocean.com',
