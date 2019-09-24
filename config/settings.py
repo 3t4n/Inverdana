@@ -88,7 +88,7 @@ SIMPLE_JWT = {
 #https://djoser.readthedocs.io/en/latest/settings.html
 DJOSER = {
     'SERIALIZERS': {
-        'user': 'djoser.serializers.UserSerializer',
+       'user': 'api.serializers.UserSerializer',
         },
 }
 

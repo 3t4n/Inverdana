@@ -20,18 +20,17 @@ class PreferenceSerializer(serializers.ModelSerializer):
 
 
 class ContactSerializer(serializers.ModelSerializer):
-    country = serializers.PrimaryKeyRelatedField(many=False,read_only=True,queryset=Country.Country.objects.all())
+    #country = serializers.PrimaryKeyRelatedField(many=False,read_only=True)
     class Meta:
         model = Contact.Contact
-        fields = ['address1', 'address2', 'cellphone','country']
+        fields = ['address1', 'address2', 'cellphone']#,'country']
 
 class UserSerializer(serializers.ModelSerializer):
+    #preferences = PreferenceSerializer()
+    info = ContactSerializer()
     class Meta:
         model = User
-        fields = tuple(User.REQUIRED_FIELDS) + (
-            settings.USER_ID_FIELD,
-            settings.LOGIN_FIELD,
-        )
+        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info'])
         read_only_fields = (settings.LOGIN_FIELD,)
 
     def update(self, instance, validated_data):

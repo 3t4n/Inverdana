@@ -16,6 +16,7 @@ Including another URLconf
 from django.urls import path
 from django.conf.urls import url, include
 from djoser import views
+from .views import UserViewSet
 
 urlpatterns = [
     #Ejemplo
@@ -26,7 +27,7 @@ urlpatterns = [
     'put': 'update',
     'patch': 'partial_update'
     })),
-    path('users/me/', views.UserViewSet.as_view({
+    path('users/me/', UserViewSet.as_view({
     'get': 'me',
     'delete': 'me',
     'put': 'me',
