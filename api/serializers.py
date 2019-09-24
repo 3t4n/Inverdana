@@ -18,19 +18,23 @@ class PreferenceSerializer(serializers.ModelSerializer):
             model = Preference.Preference
             fields = ['push_notifications_trees','push_notifications_events']
 
+class CountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Country.Country
+        fields = ['name']
 
 class ContactSerializer(serializers.ModelSerializer):
-    #country = serializers.PrimaryKeyRelatedField(many=False,read_only=True)
+    country = CountrySerializer(many=False)
     class Meta:
         model = Contact.Contact
-        fields = ['address1', 'address2', 'cellphone']#,'country']
+        fields = ['address1', 'address2', 'cellphone','country']
 
 class UserSerializer(serializers.ModelSerializer):
-    #preferences = PreferenceSerializer()
+    preferences = PreferenceSerializer()
     info = ContactSerializer()
     class Meta:
         model = User
-        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info'])
+        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences'])
         read_only_fields = (settings.LOGIN_FIELD,)
 
     def update(self, instance, validated_data):
