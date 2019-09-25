@@ -1,5 +1,5 @@
-from django.bd import models
+from django.db import models
 
-class TreeSpecies(models.Model):
+class TreeSpecie(models.Model):
     commonname = models.CharField(max_length=100, blank=False)
     sciname = models.CharField(max_length=100, blank=False)
