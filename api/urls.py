@@ -15,11 +15,28 @@ Including another URLconf
 """
 from django.urls import path
 from django.conf.urls import url, include
-import djoser.views
+from djoser import views
+from .views import UserViewSet
 
 urlpatterns = [
     #Ejemplo
-    # path('trees/', views.trees),
-    url(r'^auth/', include('djoser.urls')),
-    url(r'^auth/', include('djoser.urls.jwt')),
+    path('users/', views.UserViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+    'delete': 'destroy',
+    'put': 'update',
+    'patch': 'partial_update'
+    })),
+    path('users/me/', UserViewSet.as_view({
+    'get': 'me',
+    'delete': 'me',
+    'put': 'me',
+    'patch': 'me'
+    })),
+    
+    path('auth/login/', views.TokenCreateView.as_view()),
+    path('auth/logout/', views.TokenDestroyView.as_view()),
+#    url(r'^auth/', include('djoser.urls')),
+#    url(r'^auth/', include('djoser.urls.jwt')),
+#    url(r'^auth/', include('djoser.urls.authtoken')),
     ]

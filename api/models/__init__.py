@@ -1,3 +1,1 @@
-from . import Contact
-from . import Country
-from . import GeoEntity
+from . import Contact,Country,Preference,GeoEntity,Tree
