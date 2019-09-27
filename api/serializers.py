@@ -44,7 +44,7 @@ class TreeSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     preferences = PreferenceSerializer()
     info = ContactSerializer()
-    shares = TreeSpecieSerializer(many=True)
+#    shares = TreeSpecieSerializer(many=True)
     class Meta:
         model = User
         fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences','shares'])
