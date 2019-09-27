@@ -8,6 +8,10 @@ def login(request):
     return render(request, 'login.html')
 
 
+def logintest():
+    return '<h1>prueba</h1>'
+
+
 @login_required
 def home(request):
     return render(request, 'home.html')
