@@ -5,3 +5,4 @@ djoser
 djangorestframework_simplejwt
 pylint
 pylint-django
+social-django
