@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 from djoser import utils
 from djoser.compat import get_user_email, get_user_email_field_name
 from djoser.conf import settings
-from .models import Contact, Country, Preference
+from .models import *
 
 ##Get the current User Class defined in setting.py
 User = get_user_model()
@@ -29,12 +29,25 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact.Contact
         fields = ['address1', 'address2', 'cellphone','country']
 
+
+class TreeSpecieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tree.TreeSpecie
+        fields = ['id','common name']
+
+class TreeSerializer(serializers.ModelSerializer):
+    specie_id = TreeSpecieSerializer(many=False)
+    class Meta: 
+        model = Tree.Tree
+        fields = ['id','name','specie','age','point']
+
 class UserSerializer(serializers.ModelSerializer):
     preferences = PreferenceSerializer()
     info = ContactSerializer()
+    shares = TreeSpecieSerializer(many=True)
     class Meta:
         model = User
-        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences'])
+        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences','shares'])
         read_only_fields = (settings.LOGIN_FIELD,)
 
     def update(self, instance, validated_data):

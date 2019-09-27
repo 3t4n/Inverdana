@@ -7,7 +7,7 @@ class TreeSpecie(models.Model):
     sciname = models.CharField(max_length=100, blank=False)
 class Tree(models.Model):
     specie_id = models.ForeignKey(TreeSpecie, on_delete=models.SET_NULL, null=True)
-    shareholders = models.ManyToManyField(User, through='Share')
+    shareholders = models.ManyToManyField(User, through='Share', related_name='shares')
     name = models.CharField(max_length=100, blank=False)
     age = models.IntegerField(default=0)
     point = geomodels.PointField()
