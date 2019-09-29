@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'djoser',
     'rest_framework.authtoken',
     'django.contrib.gis',
+    'social_django',
     ]
 
 MIDDLEWARE = [
@@ -123,7 +124,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+# Fb Login
+AUTHENTICATION_BACKENDS = [
+        'social_core.backends.facebook.FacebookOAuth2',
+        'django.contrib.auth.backends.ModelBackend',
+    ]
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_FACEBOOK_KEY = 2135512016757098        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = str('727956b01a5fbdbedfd5bbf39a5a39a7')
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
