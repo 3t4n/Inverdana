@@ -1,0 +1,8 @@
+psycopg2
+django==2.2.5
+djangorestframework==3.10
+djoser
+djangorestframework_simplejwt
+pylint
+pylint-django
+social-django
