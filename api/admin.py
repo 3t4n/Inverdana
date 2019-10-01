@@ -3,7 +3,7 @@ from .models import *
 
 # Register your models here.
 admin.site.register(Contact.Contact)
-admin.site.register(Country.Country)
+admin.site.register(WorldBorder.WorldBorder)
 admin.site.register(GeoEntity.GeoEntity)
 admin.site.register(Preference.Preference)
 admin.site.register(Tree.Tree)
