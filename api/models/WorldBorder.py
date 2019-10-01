@@ -7,7 +7,7 @@ from django.contrib.gis.db import models
    Based on https://docs.djangoproject.com/en/2.2/ref/contrib/gis/tutorial/#setting-up"""
 
 
-class Country(models.Model):
+class WorldBorder(models.Model):
     """Non GIS attributes"""
     name = models.CharField(max_length=50)
     area = models.IntegerField(default=0)

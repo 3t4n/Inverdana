@@ -18,13 +18,13 @@ class PreferenceSerializer(serializers.ModelSerializer):
             model = Preference.Preference
             fields = ['push_notifications_trees','push_notifications_events']
 
-class CountrySerializer(serializers.ModelSerializer):
+class WorldBorderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Country.Country
+        model = WorldBorder.WorldBorder
         fields = ['name']
 
 class ContactSerializer(serializers.ModelSerializer):
-    country = CountrySerializer(many=False)
+    country = WorldBorderSerializer(many=False)
     class Meta:
         model = Contact.Contact
         fields = ['address1', 'address2', 'cellphone','country']
