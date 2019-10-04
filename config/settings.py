@@ -41,7 +41,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'rest_framework.authtoken',
+<<<<<<< HEAD
 		'corsheaders',
+=======
+    'django.contrib.gis',
+    'social_django',
+>>>>>>> develop
     ]
 
 MIDDLEWARE = [
@@ -91,14 +96,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
 }
+#DJOSER 
+#https://djoser.readthedocs.io/en/latest/settings.html
+DJOSER = {
+    'SERIALIZERS': {
+       'user': 'api.serializers.UserSerializer',
+        },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'Inverdana',
         'USER': 'doadmin',
         'PASSWORD': 'fiwa4olc95p3kd8g',
         'HOST': 'dev-inverdana-db-do-user-6572351-0.db.ondigitalocean.com',
@@ -123,7 +135,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+# Fb Login
+AUTHENTICATION_BACKENDS = [
+        'social_core.backends.facebook.FacebookOAuth2',
+        'django.contrib.auth.backends.ModelBackend',
+    ]
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_FACEBOOK_KEY = 2135512016757098        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = str('727956b01a5fbdbedfd5bbf39a5a39a7')
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

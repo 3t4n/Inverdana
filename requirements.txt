@@ -3,4 +3,10 @@ django==2.2.5
 djangorestframework==3.10
 djoser
 djangorestframework_simplejwt
+<<<<<<< HEAD
 django-cors-headers
+=======
+pylint
+pylint-django
+social-django
+>>>>>>> develop
