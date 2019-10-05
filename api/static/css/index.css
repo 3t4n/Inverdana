@@ -3,7 +3,7 @@ img {
     }
     .container-fluid {
       height: 100vh;
-      background-color: #39b33b;
+      background-color: #74b49b;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -26,6 +26,7 @@ img {
       text-decoration: none ;
     }
 
-background{
-color : #74b49b;
+
+body{
+background-color : #74b49b;
 }
