@@ -33,18 +33,23 @@ class ContactSerializer(serializers.ModelSerializer):
 class TreeSpecieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tree.TreeSpecie
-        fields = ['id','common name']
+        fields = ['id','commonname']
 
 class TreeSerializer(serializers.ModelSerializer):
     specie_id = TreeSpecieSerializer(many=False)
     class Meta: 
         model = Tree.Tree
-        fields = ['id','name','specie','age','point']
+        fields = ['id','specie_id','name','age','point']
+class ShareSerializer(serializers.ModelSerializer):
+    tree_id = TreeSerializer(many=False)
+    class Meta:
+        model = Tree.Share
+        fields = ['id','dateCreated','dateModified','percentage','owner','tree_id']
 
 class UserSerializer(serializers.ModelSerializer):
     preferences = PreferenceSerializer()
     info = ContactSerializer()
-    shares = TreeSpecieSerializer(many=True)
+    shares = ShareSerializer(many=True)
     class Meta:
         model = User
         fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences','shares'])

@@ -7,14 +7,14 @@ class TreeSpecie(models.Model):
     sciname = models.CharField(max_length=100, blank=False)
 class Tree(models.Model):
     specie_id = models.ForeignKey(TreeSpecie, on_delete=models.SET_NULL, null=True)
-    shareholders = models.ManyToManyField(User, through='Share', related_name='shares')
+    shareholders = models.ManyToManyField(User, through='Share')
     name = models.CharField(max_length=100, blank=False)
     age = models.IntegerField(default=0)
     point = geomodels.PointField()
 
 
 class Share(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shares')
     tree_id = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True)
     owner = models.BooleanField(default=True)
     percentage = models.IntegerField(default=100)
