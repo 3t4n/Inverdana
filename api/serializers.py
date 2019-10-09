@@ -25,7 +25,6 @@ class WorldBorderSerializer(serializers.ModelSerializer):
         fields = ['id']
 
 class ContactSerializer(serializers.ModelSerializer):
-    #country = WorldBorderSerializer(many=True)
     class Meta:
         model = Contact.Contact
         fields = ['address1', 'address2', 'cellphone','country']
@@ -66,7 +65,7 @@ class UserSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 class UserCreateSerializerCustomFields(UserCreateSerializer):
-    info = ContactSerializer()
+    info = ContactSerializer(read_only=False)
     class Meta:
         model = User
         fields = tuple(User.REQUIRED_FIELDS) + (
@@ -77,3 +76,22 @@ class UserCreateSerializerCustomFields(UserCreateSerializer):
             'last_name',
             'info',
         )
+    def create(self, validated_data):
+        try:
+            user = self.perform_create(validated_data)
+            print(validated_data)
+        except IntegrityError:
+            self.fail("cannot_create_user")
+
+        return user
+    def validate(self, attrs):
+        return attrs
+    def perform_create(self, validated_data):
+        contact_data = validated_data.pop('info')
+        with transaction.atomic():
+            user = User.objects.create_user(**validated_data)
+            validated_data['info'] = Contact.Contact.objects.create(user_id=user,**contact_data)
+            if settings.SEND_ACTIVATION_EMAIL:
+                user.is_active = False
+                user.save(update_fields=["is_active"])
+        return user
