@@ -5,6 +5,7 @@ from django.db import IntegrityError, transaction
 from rest_framework import exceptions, serializers
 from rest_framework.exceptions import ValidationError
 from djoser import utils
+from  djoser.serializers import UserCreateSerializer
 from djoser.compat import get_user_email, get_user_email_field_name
 from djoser.conf import settings
 from .models import *
@@ -21,10 +22,10 @@ class PreferenceSerializer(serializers.ModelSerializer):
 class WorldBorderSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorldBorder.WorldBorder
-        fields = ['name']
+        fields = ['id']
 
 class ContactSerializer(serializers.ModelSerializer):
-    country = WorldBorderSerializer(many=False)
+    #country = WorldBorderSerializer(many=True)
     class Meta:
         model = Contact.Contact
         fields = ['address1', 'address2', 'cellphone','country']
@@ -63,3 +64,16 @@ class UserSerializer(serializers.ModelSerializer):
                 instance.is_active = False
                 instance.save(update_fields=["is_active"])
         return super().update(instance, validated_data)
+
+class UserCreateSerializerCustomFields(UserCreateSerializer):
+    info = ContactSerializer()
+    class Meta:
+        model = User
+        fields = tuple(User.REQUIRED_FIELDS) + (
+            settings.LOGIN_FIELD,
+            User._meta.pk.name,
+            'first_name',
+            'last_name',
+            'info',
+            "password",
+        )
