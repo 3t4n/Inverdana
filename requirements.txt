@@ -6,3 +6,4 @@ djangorestframework_simplejwt
 pylint
 pylint-django
 social-django
+django-cors-headers
