@@ -72,8 +72,8 @@ class UserCreateSerializerCustomFields(UserCreateSerializer):
         fields = tuple(User.REQUIRED_FIELDS) + (
             settings.LOGIN_FIELD,
             User._meta.pk.name,
+            "password",
             'first_name',
             'last_name',
             'info',
-            "password",
         )
