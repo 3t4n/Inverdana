@@ -1,2 +1,1 @@
-from . import Contact,WorldBorder,Preference,GeoEntity,Tree
-
+from . import Contact,WorldBorder,Preference,GeoEntity,Tree,Photo

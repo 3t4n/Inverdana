@@ -35,11 +35,18 @@ class TreeSpecieSerializer(serializers.ModelSerializer):
         model = Tree.TreeSpecie
         fields = ['id','commonname']
 
+class PhotoSpecieSerializer(serializers.ModelSerializer):
+    photo_thumbnail = serializers.ImageField()
+    class Meta:
+        model = Photo.Photo
+        fields = ['id','photo','photo_thumbnail']
+
 class TreeSerializer(serializers.ModelSerializer):
+    photos = PhotoSpecieSerializer(many=True)
     specie_id = TreeSpecieSerializer(many=False)
     class Meta: 
         model = Tree.Tree
-        fields = ['id','specie_id','name','age','point']
+        fields = ['id','specie_id','name','age','photos','point']
 class ShareSerializer(serializers.ModelSerializer):
     tree = TreeSerializer(many=False)
     class Meta:
