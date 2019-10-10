@@ -27,7 +27,7 @@ class WorldBorderSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact.Contact
-        fields = ['address1', 'address2', 'cellphone','country']
+        fields = ['address1', 'address2', 'cellphone','country','birthday']
 
 
 class TreeSpecieSerializer(serializers.ModelSerializer):
@@ -41,10 +41,10 @@ class TreeSerializer(serializers.ModelSerializer):
         model = Tree.Tree
         fields = ['id','specie_id','name','age','point']
 class ShareSerializer(serializers.ModelSerializer):
-    tree_id = TreeSerializer(many=False)
+    tree = TreeSerializer(many=False)
     class Meta:
         model = Tree.Share
-        fields = ['id','dateCreated','dateModified','percentage','owner','tree_id']
+        fields = ['id','dateCreated','dateModified','percentage','owner','tree']
 
 class UserSerializer(serializers.ModelSerializer):
     preferences = PreferenceSerializer()
@@ -85,6 +85,7 @@ class UserCreateSerializerCustomFields(UserCreateSerializer):
 
         return user
     def validate(self, attrs):
+        #Falta hacer verificacion :)
         return attrs
     def perform_create(self, validated_data):
         contact_data = validated_data.pop('info')

@@ -15,7 +15,7 @@ class Tree(models.Model):
 
 class Share(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shares')
-    tree_id = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True)
+    tree = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True)
     owner = models.BooleanField(default=True)
     percentage = models.IntegerField(default=100)
     dateCreated = models.DateField(auto_now_add=True)
