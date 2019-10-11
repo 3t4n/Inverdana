@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from djoser import views
-from .serializers import UserSerializer
+from .serializers import *
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
-
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import routers, serializers, viewsets
 
 
 User = get_user_model()
@@ -17,6 +18,8 @@ class UserViewSet(views.UserViewSet):
         serializer = UserSerializer(instance)
         return Response(serializer.data)
 
+class CountryViewSet(viewsets.ModelViewSet):
+    pass
 
 def login(request):
     return render(request, 'login.html')

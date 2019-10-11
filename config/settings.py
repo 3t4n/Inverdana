@@ -25,7 +25,7 @@ SECRET_KEY = '&0x1d&qbn0te3sck7b*7p337cskn*m4@rp&!ajwraa()g6zv5y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,9 +44,14 @@ INSTALLED_APPS = [
 		'corsheaders',
     'django.contrib.gis',
     'social_django',
+    'corsheaders',
+    'imagekit',
     ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,7 +104,8 @@ SIMPLE_JWT = {
 DJOSER = {
     'SERIALIZERS': {
        'user': 'api.serializers.UserSerializer',
-        },
+       'user_create': 'api.serializers.UserCreateSerializerCustomFields',
+       },
 }
 
 # Database
@@ -165,3 +171,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = BASE_DIR+'/static/media/'
+MEDIA_URL = '/media/'
+
+#Indentification Module
+
+IDENTIFIER_STATUS = [
+        ('D','Dañado'),
+        ('P','Perdido'),
+        ('NA','No Activo'),
+        ('A','Activo'),
+        ]
