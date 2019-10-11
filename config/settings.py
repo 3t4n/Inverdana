@@ -164,3 +164,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = BASE_DIR+'/static/media/'
 MEDIA_URL = '/media/'
+
+#Indentification Module
+
+IDENTIFIER_STATUS = [
+        ('D','Dañado'),
+        ('P','Perdido'),
+        ('NA','No Activo'),
+        ('A','Activo'),
+        ]

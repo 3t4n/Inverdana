@@ -13,6 +13,10 @@ from .models import *
 ##Get the current User Class defined in setting.py
 User = get_user_model()
 
+class QRcodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Identifier.QRcode
+        fields = ['status','string','code']
 
 class PreferenceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,9 +48,10 @@ class PhotoSpecieSerializer(serializers.ModelSerializer):
 class TreeSerializer(serializers.ModelSerializer):
     photos = PhotoSpecieSerializer(many=True)
     specie_id = TreeSpecieSerializer(many=False)
+    identifiers = QRcodeSerializer(many=True)
     class Meta: 
         model = Tree.Tree
-        fields = ['id','specie_id','name','age','photos','point']
+        fields = ['id','specie_id','name','age','identifiers','photos','point']
 class ShareSerializer(serializers.ModelSerializer):
     tree = TreeSerializer(many=False)
     class Meta:
