@@ -16,7 +16,7 @@ User = get_user_model()
 class QRcodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Identifier.QRcode
-        fields = ['status','string','code']
+        fields = ['status','string','code','tree_id']
 
 class PreferenceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,7 +26,7 @@ class PreferenceSerializer(serializers.ModelSerializer):
 class WorldBorderSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorldBorder.WorldBorder
-        fields = ['id']
+        fields = ['id','name']
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:

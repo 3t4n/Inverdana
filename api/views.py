@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from djoser import views
 from .serializers import *
+from .models import *
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
@@ -18,8 +19,18 @@ class UserViewSet(views.UserViewSet):
         serializer = UserSerializer(instance)
         return Response(serializer.data)
 
-class CountryViewSet(viewsets.ModelViewSet):
-    pass
+class WorldBorderViewSet(viewsets.ModelViewSet):
+    queryset =  WorldBorder.WorldBorder.objects.all()
+    serializer_class = WorldBorderSerializer
+
+class TreeViewSet(viewsets.ModelViewSet):
+    queryset = Tree.Tree.objects.all()
+    serializer_class = TreeSerializer
+
+class QRcodeViewSet(viewsets.ModelViewSet):
+    queryset = Identifier.QRcode.objects.all()
+    serializer_class = QRcodeSerializer
+
 
 def login(request):
     return render(request, 'login.html')

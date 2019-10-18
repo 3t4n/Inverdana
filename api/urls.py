@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from api import views
 from django.conf.urls import url, include
 from djoser import views
-from .views import UserViewSet
+from .views import *
 
 urlpatterns = [
     #Ejemplo
@@ -39,6 +39,19 @@ urlpatterns = [
     
     path('auth/login/', views.TokenCreateView.as_view()),
     path('auth/logout/', views.TokenDestroyView.as_view()),
+    path('worldborders/',  WorldBorderViewSet.as_view({'get':'list'})),
+    path('trees/',TreeViewSet.as_view({
+        'get':'list',
+        'post':'create',
+        'put': 'update',
+        'patch': 'partial_update'
+        })),
+    path('qrcode/',QRcodeViewSet.as_view({
+        'get':'list',
+        'post':'create',
+        'put': 'update',
+        'patch': 'partial_update' 
+        }))
 #    url(r'^auth/', include('djoser.urls')),
 #    url(r'^auth/', include('djoser.urls.jwt')),
 #    url(r'^auth/', include('djoser.urls.authtoken')),
