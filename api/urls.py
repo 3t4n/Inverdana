@@ -46,7 +46,7 @@ urlpatterns = [
         'put': 'update',
         'patch': 'partial_update'
         })),
-    path('qrcode/',QRcodeViewSet.as_view({
+    path('qrcodes/',QRcodeViewSet.as_view({
         'get':'list',
         'post':'create',
         'put': 'update',
