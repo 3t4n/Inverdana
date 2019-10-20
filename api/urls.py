@@ -20,6 +20,14 @@ from api import views
 from django.conf.urls import url, include
 from djoser import views
 from .views import *
+from rest_framework import routers
+
+
+router = routers.SimpleRouter()
+router.register(r'qrcodes', QRcodeViewSet)
+router.register(r'trees', TreeViewSet)
+router.register(r'shares', SharesViewSet)
+router.register(r'worldborders', WorldBorderViewSet)
 
 urlpatterns = [
     #Ejemplo
@@ -39,21 +47,8 @@ urlpatterns = [
     
     path('auth/login/', views.TokenCreateView.as_view()),
     path('auth/logout/', views.TokenDestroyView.as_view()),
-    path('worldborders/',  WorldBorderViewSet.as_view({'get':'list'})),
-    path('trees/',TreeViewSet.as_view({
-        'get':'list',
-        'post':'create',
-        'put': 'update',
-        'patch': 'partial_update'
-        })),
-    path('qrcodes/',QRcodeViewSet.as_view({
-        'get':'list',
-        'post':'create',
-        'put': 'update',
-        'patch': 'partial_update' 
-        }))
 #    url(r'^auth/', include('djoser.urls')),
 #    url(r'^auth/', include('djoser.urls.jwt')),
 #    url(r'^auth/', include('djoser.urls.authtoken')),
 
-    ]
+    ] + router.urls

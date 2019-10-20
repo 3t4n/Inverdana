@@ -12,3 +12,4 @@ django-cors-headers
 Pillow
 django-imagekit
 qrcode==6.1
+django-countries

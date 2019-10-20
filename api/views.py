@@ -31,6 +31,9 @@ class QRcodeViewSet(viewsets.ModelViewSet):
     queryset = Identifier.QRcode.objects.all()
     serializer_class = QRcodeSerializer
 
+class SharesViewSet(viewsets.ModelViewSet):
+    queryset = Tree.Share.objects.all()
+    serializer_class = ShareSerializer
 
 def login(request):
     return render(request, 'login.html')

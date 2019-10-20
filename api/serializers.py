@@ -26,7 +26,7 @@ class PreferenceSerializer(serializers.ModelSerializer):
 class WorldBorderSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorldBorder.WorldBorder
-        fields = ['id','name']
+        fields = ['iso2','name']
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
