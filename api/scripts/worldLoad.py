@@ -18,5 +18,5 @@ world_mapping = {
 world_shp = settings.BASE_DIR+"/data/TM_WORLD_BORDERS-0.3.shp"
 #We need to tranform WGS84 to 3857
 def run(verbose=True):
-    lm = LayerMapping(WorldBorder.WorldBorder, world_shp, world_mapping, transform=True)
+    lm = LayerMapping(WorldBorder.WorldBorder, world_shp, world_mapping, transform=False)
     lm.save(strict=True, verbose=True)

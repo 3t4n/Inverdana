@@ -1,13 +1,22 @@
-from django.contrib import admin
+from .forms.admin.login import *
+from django.contrib.admin import AdminSite
 from .models import *
+from django.contrib.auth.models import User
+class AdminSite(AdminSite):
+    site_header = 'Inverdana'
+    login_template ='admin/login.html'
+    login_form = AuthForm
+
+
+admin = AdminSite(name='Inverdana')
 
 # Register your models here.
-admin.site.register(Contact.Contact)
-admin.site.register(WorldBorder.WorldBorder)
-admin.site.register(GeoEntity.GeoEntity)
-admin.site.register(Preference.Preference)
-admin.site.register(Tree.Tree)
-admin.site.register(Tree.TreeSpecie)
-admin.site.register(Tree.Share)
-admin.site.register(Photo.Photo)
-admin.site.register(Identifier.QRcode)
+admin.register(Contact.Contact)
+admin.register(WorldBorder.WorldBorder)
+admin.register(Preference.Preference)
+admin.register(Tree.Tree)
+admin.register(Tree.TreeSpecie)
+admin.register(Tree.Share)
+admin.register(Photo.Photo)
+admin.register(Identifier.QRcode)
+admin.register(User)

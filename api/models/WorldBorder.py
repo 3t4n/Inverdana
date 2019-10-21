@@ -18,8 +18,10 @@ class WorldBorder(models.Model):
     region = models.IntegerField('Region Code', default=-1)
     subregion = models.IntegerField('Sub-Region Code', default=-1)
     """GIS Attributes"""
-    mpoly = models.MultiPolygonField(null=True,srid=3857)
+    mpoly = models.MultiPolygonField(null=True)#,sWorldBorderrid=3857)
 
     """For Admin and API"""
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name_plural = "Paises"

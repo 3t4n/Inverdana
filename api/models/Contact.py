@@ -10,3 +10,5 @@ class Contact(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True, related_name='info')
     """If for some reason one country is removed then all Contact go to NULL"""
     country = models.OneToOneField(WorldBorder.WorldBorder, on_delete=models.SET_NULL, null=True, related_name='country')
+    class Meta:
+        verbose_name_plural = "Fichas de Contacto" 

@@ -13,3 +13,5 @@ class Identifier(models.Model):
 class QRcode(Identifier):
     string = models.CharField(max_length=6,blank=True,primary_key=True)
     code = models.ImageField(upload_to='qr', blank=True, null=True)
+    class Meta:
+        verbose_name_plural = "Códigos Qr"

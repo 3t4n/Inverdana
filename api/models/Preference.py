@@ -11,3 +11,5 @@ class Preference(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,related_name="preferences")
     push_notifications_trees = models.BooleanField(default=True)
     push_notifications_events = models.BooleanField(default=True)
+    class meta:
+        verbose_name_plural = "Preferencias"
