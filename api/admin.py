@@ -1,7 +1,7 @@
 from .forms.admin.login import *
 from django.contrib.admin import AdminSite
 from .models import *
-from django.contrib.auth.models import User
+from django.contrib.auth.models import *
 
 class AdminSite(AdminSite):
     site_header = 'Inverdana'
@@ -26,3 +26,5 @@ admin.register(Tree.Share)
 admin.register(Photo.Photo)
 admin.register(Identifier.QRcode)
 admin.register(User)
+admin.register(Permission)
+admin.register(Group)
