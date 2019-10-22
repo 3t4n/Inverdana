@@ -22,5 +22,6 @@ class WorldBorder(models.Model):
     mpoly = models.MultiPolygonField(null=True)
 
     """For Admin and API"""
+
     def __str__(self):
-        return self.name
+        return 'name= %s' % (self.name)

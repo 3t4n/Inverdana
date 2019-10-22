@@ -14,3 +14,5 @@ class Photo(models.Model):
                                       format='JPEG',
                                       options={'quality': 60})
     treed_id = models.ForeignKey(Tree.Tree, on_delete=models.SET_NULL, null=True,related_name='photos')
+    def __str__(self):
+        return '%s' % (self.treed_id)

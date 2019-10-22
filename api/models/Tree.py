@@ -5,12 +5,19 @@ from django.contrib.gis.db import models as geomodels
 class TreeSpecie(models.Model):
     commonname = models.CharField(max_length=100, blank=False)
     sciname = models.CharField(max_length=100, blank=False)
+
+    def __str__(self):
+        return '%s' % (self.commonname)
+
 class Tree(models.Model):
     specie_id = models.ForeignKey(TreeSpecie, on_delete=models.SET_NULL, null=True)
     shareholders = models.ManyToManyField(User, through='Share')
     name = models.CharField(max_length=100, blank=False)
     age = models.IntegerField(default=0)
     point = geomodels.PointField()
+
+    def __str__(self):
+        return 'Name: %s, Specie: %s' % (self.name, self.specie_id)
 
 
 class Share(models.Model):
@@ -20,5 +27,8 @@ class Share(models.Model):
     percentage = models.IntegerField(default=100)
     dateCreated = models.DateField(auto_now_add=True)
     dateModified = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return '%s %s' % (self.tree, self.owner)
 
 
