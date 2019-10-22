@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'rest_framework.authtoken',
-		'corsheaders',
     'django.contrib.gis',
     'social_django',
     'corsheaders',
@@ -63,11 +62,12 @@ MIDDLEWARE = [
 ]
 
 #Modificar para produccion
-CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ORIGIN_WHITELIST = (
-       'https://localhost:3000',
-)
+
+#CORS_ORIGIN_WHITELIST = (
+ #      'https://localhost:3000',
+#)
 #
 ROOT_URLCONF = 'config.urls'
 
