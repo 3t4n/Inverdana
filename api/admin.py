@@ -6,8 +6,6 @@ class AdminSite(AdminSite):
     site_header = 'Inverdana'
     login_template ='admin/login.html'
     login_form = AuthForm
-
-
 admin = AdminSite(name='Inverdana')
 
 # Register your models here.
