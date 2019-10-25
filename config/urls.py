@@ -22,11 +22,10 @@ from django.conf import settings
 from api import views
 #from api import urls
 urlpatterns = [
-    path('admin/', admin.admin.urls),
+    path('', admin.admin.urls),
     path('api/', include('api.urls')),
     path("login/", views.login, name="login"),
     path('test/', views.logintest, name="test"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path('social-auth/', include('social_django.urls', namespace="social")),
-    path("", views.home, name="home"),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
