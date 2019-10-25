@@ -10,8 +10,14 @@ class Identifier(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return '%s' % (self.status)
+
 class QRcode(Identifier):
     string = models.CharField(max_length=6,blank=True,primary_key=True)
     code = models.ImageField(upload_to='qr', blank=True, null=True)
     class Meta:
         verbose_name_plural = "Códigos Qr"
+
+    def __str__(self):
+        return 'QR= %s' % (self.string)

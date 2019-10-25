@@ -16,3 +16,5 @@ class Photo(models.Model):
     treed_id = models.ForeignKey(Tree.Tree, on_delete=models.SET_NULL, null=True,related_name='photos')
     class Meta:
         verbose_name_plural = "Fotos"
+    def __str__(self):
+        return '%s' % (self.treed_id)

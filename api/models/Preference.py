@@ -13,3 +13,5 @@ class Preference(models.Model):
     push_notifications_events = models.BooleanField(default=True)
     class meta:
         verbose_name_plural = "Preferencias"
+    def __str__(self):
+        return 'User ID= %s' % (self.user_id)

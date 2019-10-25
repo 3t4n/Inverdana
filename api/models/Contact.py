@@ -12,3 +12,6 @@ class Contact(models.Model):
     country = models.OneToOneField(WorldBorder.WorldBorder, on_delete=models.SET_NULL, null=True, related_name='country')
     class Meta:
         verbose_name_plural = "Fichas de Contacto" 
+
+    def __str__(self):
+        return '%s' % (self.user_id)

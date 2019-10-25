@@ -8,7 +8,8 @@ class TreeSpecie(models.Model):
     class Meta:
         verbose_name_plural = "Especies de árboles"
         verbose_name="especie de árbol"
-
+    def __str__(self):
+        return '%s' % (self.commonname)
 
 class Tree(models.Model):
     specie_id = models.ForeignKey(TreeSpecie, on_delete=models.SET_NULL, null=True)
@@ -19,6 +20,9 @@ class Tree(models.Model):
     class Meta:
         verbose_name_plural = "Árboles"
         verbose_name="árbol"
+    def __str__(self):
+        return 'Name: %s, Specie: %s' % (self.name, self.specie_id)
+
 
 class Share(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shares')
@@ -30,3 +34,7 @@ class Share(models.Model):
     class Meta:
         verbose_name_plural = "Acciones"
         verbose_name = "acción"
+
+    def __str__(self):
+        return '%s %s' % (self.tree, self.owner)
+
