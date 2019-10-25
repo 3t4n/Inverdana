@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">update</i> Just Updated
+                    <i class="material-icons">update</i> Recién actualizado
                   </div>
                 </div>
               </div>
@@ -32,14 +32,14 @@
               <div class="card card-stats">
                 <div class="card-header card-header-info card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">people</i>
+                    <i class="material-icons">nature</i>
                   </div>
                   <p class="card-category">Árboles</p>
 		  <h3 class="card-title">{{treesCount}}</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">update</i> Just Updated
+                    <i class="material-icons">update</i> Recién actualizado
                   </div>
                 </div>
               </div>
@@ -58,7 +58,7 @@
         </div>
 	<div class="card-body">
 		<div class="table-responsive">
-	<table class="table">
+	<table class="table table-hover">
 	{% for model in app.models %}
             <tr class="model-{{ model.object_name|lower }}">
             {% if model.admin_url %}
@@ -92,11 +92,9 @@
     {% endfor %}
 </div>
 </div>
-</div>        
-</div>        
+</div>
+</div>
 {% else %}
     <p>{% trans "You don't have permission to view or edit anything." %}</p>
 {% endif %}
 {% endblock %}
-
-
