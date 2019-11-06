@@ -13,3 +13,4 @@ Pillow
 django-imagekit
 qrcode==6.1
 django-countries
+django_filters
