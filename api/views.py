@@ -8,8 +8,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import routers, serializers, viewsets
-
+from rest_framework import routers, serializers, viewsets, filters
+from filters.mixins import (
+    FiltersMixin,
+)
 
 User = get_user_model()
 
@@ -27,13 +29,23 @@ class TreeViewSet(viewsets.ModelViewSet):
     queryset = Tree.Tree.objects.all()
     serializer_class = TreeSerializer
 
+class TreeSpecieViewSet(viewsets.ModelViewSet):
+    queryset = Tree.TreeSpecie.objects.all()
+    serializer_class = TreeSpecieSerializer
+
 class QRcodeViewSet(viewsets.ModelViewSet):
     queryset = Identifier.QRcode.objects.all()
     serializer_class = QRcodeSerializer
 
-class SharesViewSet(viewsets.ModelViewSet):
+class SharesViewSet(FiltersMixin,viewsets.ModelViewSet):
     queryset = Tree.Share.objects.all()
     serializer_class = ShareSerializer
+    filter_backends = (filters.OrderingFilter,)
+    filter_mappings = {
+        'id': 'id',
+        'tree_id': 'tree_id',
+    }
+
 
 def login(request):
     return render(request, 'login.html')

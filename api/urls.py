@@ -26,6 +26,7 @@ from rest_framework import routers
 router = routers.SimpleRouter()
 router.register(r'qrcodes', QRcodeViewSet)
 router.register(r'trees', TreeViewSet)
+router.register(r'species', TreeSpecieViewSet)
 router.register(r'shares', SharesViewSet)
 router.register(r'worldborders', WorldBorderViewSet)
 

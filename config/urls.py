@@ -22,7 +22,7 @@ from django.conf import settings
 from api import views
 #from api import urls
 urlpatterns = [
-    path('', admin.admin.urls),
+    path('admin/', admin.admin.urls),
     path('api/', include('api.urls')),
     path("login/", views.login, name="login"),
     path('test/', views.logintest, name="test"),

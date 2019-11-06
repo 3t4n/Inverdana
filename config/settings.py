@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'social_django',
     'corsheaders',
     'imagekit',
+    'filters',
     ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -85,6 +86,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SIMPLE_JWT = {
@@ -105,7 +107,7 @@ DJOSER = {
 DATABASES = {
         'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'Inverdana',
+        'NAME': 'hot-fix',
         'USER': 'doadmin',
         'PASSWORD': 'fiwa4olc95p3kd8g',
         'HOST': 'dev-inverdana-db-do-user-6572351-0.db.ondigitalocean.com',

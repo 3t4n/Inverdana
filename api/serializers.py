@@ -31,7 +31,7 @@ class WorldBorderSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact.Contact
-        fields = ['address1', 'address2', 'cellphone','country','birthday']
+        fields = [ 'cellphone','country','birthday']
 
 
 class TreeSpecieSerializer(serializers.ModelSerializer):
@@ -47,16 +47,15 @@ class PhotoSpecieSerializer(serializers.ModelSerializer):
 
 class TreeSerializer(serializers.ModelSerializer):
     photos = PhotoSpecieSerializer(many=True)
-    specie_id = TreeSpecieSerializer(many=False)
-    identifiers = QRcodeSerializer(many=True)
     class Meta: 
         model = Tree.Tree
         fields = ['id','specie_id','name','age','identifiers','photos','point']
 class ShareSerializer(serializers.ModelSerializer):
     tree = TreeSerializer(many=False)
+    tree_id = serializers.IntegerField(source='tree.id')
     class Meta:
         model = Tree.Share
-        fields = ['id','dateCreated','dateModified','percentage','owner','tree']
+        fields = ['user_id','id','dateCreated','dateModified','percentage','owner','tree_id','tree']
 
 class UserSerializer(serializers.ModelSerializer):
     preferences = PreferenceSerializer()
