@@ -37,6 +37,10 @@ class QRcodeViewSet(viewsets.ModelViewSet):
     queryset = Identifier.QRcode.objects.all()
     serializer_class = QRcodeSerializer
 
+class PhotosViewSet(viewsets.ModelViewSet):
+    queryset = Photo.Photo.objects.all()
+    serializer_class = PhotosSerializer
+
 class SharesViewSet(FiltersMixin,viewsets.ModelViewSet):
     queryset = Tree.Share.objects.all()
     serializer_class = ShareSerializer

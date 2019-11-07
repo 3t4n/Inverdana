@@ -7,13 +7,12 @@ import qrcode
 ##Receiver function
 
 def QRcode_receiver(sender, instance, *args, **kwargs):
-    #if instance.string and instance.code:
-    if True:
+    if not instance.string:
         qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,)
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,)
         instance.string = get_random_string(length=6)
         qr.add_data(instance.string)
         img = qr.make_image()

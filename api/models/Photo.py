@@ -13,8 +13,8 @@ class Photo(models.Model):
                                       processors=[ResizeToFill(250, 250)],
                                       format='JPEG',
                                       options={'quality': 60})
-    treed_id = models.ForeignKey(Tree.Tree, on_delete=models.SET_NULL, null=True,related_name='photos')
+    tree_id = models.ForeignKey(Tree.Tree, on_delete=models.SET_NULL, null=True,related_name='photos')
     class Meta:
         verbose_name_plural = "Fotos"
     def __str__(self):
-        return '%s' % (self.treed_id)
+        return '%s' % (self.tree_id)

@@ -16,7 +16,10 @@ User = get_user_model()
 class QRcodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Identifier.QRcode
-        fields = ['status','string','code','tree_id']
+        fields = ['status',
+                'string',
+               # 'code',
+                'tree_id']
 
 class PreferenceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -39,14 +42,19 @@ class TreeSpecieSerializer(serializers.ModelSerializer):
         model = Tree.TreeSpecie
         fields = ['id','commonname']
 
-class PhotoSpecieSerializer(serializers.ModelSerializer):
+class PhotoSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
     class Meta:
         model = Photo.Photo
         fields = ['id','photo','photo_thumbnail']
 
+class PhotosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo.Photo
+        fields = ['id','photo','tree_id']
+
 class TreeSerializer(serializers.ModelSerializer):
-    photos = PhotoSpecieSerializer(many=True)
+    photos = PhotoSerializer(many=True)
     class Meta: 
         model = Tree.Tree
         fields = ['id','specie_id','name','age','identifiers','photos','point']
