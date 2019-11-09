@@ -1,3 +1,4 @@
+imagekit
 psycopg2
 django==2.2.5
 djangorestframework==3.10

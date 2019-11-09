@@ -1,3 +1,4 @@
+from api.models import Event
 from .forms.admin.login import *
 from django.contrib.admin import AdminSite
 from .models import *
@@ -28,3 +29,5 @@ admin.register(Identifier.QRcode)
 admin.register(User)
 admin.register(Permission)
 admin.register(Group)
+admin.register(Event.Event)
+

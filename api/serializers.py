@@ -8,6 +8,8 @@ from djoser import utils
 from  djoser.serializers import UserCreateSerializer
 from djoser.compat import get_user_email, get_user_email_field_name
 from djoser.conf import settings
+
+from api.models import Event
 from .models import *
 
 ##Get the current User Class defined in setting.py
@@ -41,6 +43,12 @@ class TreeSpecieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tree.TreeSpecie
         fields = ['id','commonname']
+
+#Events
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event.Event
+        fields = ['name']
 
 class PhotoSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()

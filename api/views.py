@@ -9,9 +9,7 @@ from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import routers, serializers, viewsets, filters
-from filters.mixins import (
-    FiltersMixin,
-)
+#from filters.mixins import (FiltersMixin,)
 
 User = get_user_model()
 
@@ -41,7 +39,14 @@ class PhotosViewSet(viewsets.ModelViewSet):
     queryset = Photo.Photo.objects.all()
     serializer_class = PhotosSerializer
 
-class SharesViewSet(FiltersMixin,viewsets.ModelViewSet):
+#Events
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = Event.Event.objects.all()
+    serializer_class = EventSerializer
+
+#class SharesViewSet(FiltersMixin,viewsets.ModelViewSet):
+class SharesViewSet(viewsets.ModelViewSet):
+
     queryset = Tree.Share.objects.all()
     serializer_class = ShareSerializer
     filter_backends = (filters.OrderingFilter,)
