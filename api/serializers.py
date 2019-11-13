@@ -54,10 +54,11 @@ class PhotosSerializer(serializers.ModelSerializer):
         fields = ['id','photo','tree_id']
 
 class TreeSerializer(serializers.ModelSerializer):
-    photos = PhotoSerializer(many=True)
+    photos = PhotoSerializer(many=True,required=False,read_only=True)
     class Meta: 
         model = Tree.Tree
         fields = ['id','specie_id','name','age','identifiers','photos','point']
+
 class ShareSerializer(serializers.ModelSerializer):
     tree = TreeSerializer(many=False)
     tree_id = serializers.IntegerField(source='tree.id')
