@@ -30,6 +30,7 @@ router.register(r'species', TreeSpecieViewSet)
 router.register(r'shares', SharesViewSet)
 router.register(r'photos', PhotosViewSet)
 router.register(r'worldborders', WorldBorderViewSet)
+router.register(r'events', EventViewSet)
 
 urlpatterns = [
     #Ejemplo
