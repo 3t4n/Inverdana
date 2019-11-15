@@ -22,6 +22,7 @@ from django.conf import settings
 from api import views
 #from api import urls
 urlpatterns = [
+    path('', include('landing.urls')),
     path('admin/', admin.admin.urls),
     path('api/', include('api.urls')),
     path('', include('landing.urls')),
