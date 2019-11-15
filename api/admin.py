@@ -32,4 +32,5 @@ admin.register(User)
 admin.register(Permission)
 admin.register(Group)
 admin.register(Event.Event)
-
+admin.register(Tree.HasState)
+admin.register(Tree.TreeState)
