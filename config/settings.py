@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'imagekit',
     'filters',
+    'landing',
     ]
 
 CORS_ORIGIN_ALLOW_ALL = True

@@ -1,8 +1,9 @@
 from api.models import Event
 from .forms.admin.login import *
-from django.contrib.admin import AdminSite
+from django.contrib.admin import AdminSite,ModelAdmin
 from .models import *
 from django.contrib.auth.models import *
+from .modeladmins import *
 
 class AdminSite(AdminSite):
     site_header = 'Inverdana'
@@ -17,6 +18,7 @@ class AdminSite(AdminSite):
 
 admin = AdminSite(name='Inverdana')
 
+
 # Register your models here.
 admin.register(Contact.Contact)
 admin.register(WorldBorder.WorldBorder)
@@ -25,7 +27,7 @@ admin.register(Tree.Tree)
 admin.register(Tree.TreeSpecie)
 admin.register(Tree.Share)
 admin.register(Photo.Photo)
-admin.register(Identifier.QRcode)
+admin.register(Identifier.QRcode,QrCodeAdmin) 
 admin.register(User)
 admin.register(Permission)
 admin.register(Group)

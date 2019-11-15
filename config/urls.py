@@ -24,6 +24,7 @@ from api import views
 urlpatterns = [
     path('admin/', admin.admin.urls),
     path('api/', include('api.urls')),
+    path('', include('landing.urls')),
     path("login/", views.login, name="login"),
     path('test/', views.logintest, name="test"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
