@@ -21,5 +21,6 @@ from .views import *
 
 
 urlpatterns = [
-        path('', home, name='index')
+        path('', home, name='index'),
+        path('inverdana', inverdana_site, name='blog.html')
         ] 

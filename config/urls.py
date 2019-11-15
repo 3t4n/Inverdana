@@ -20,9 +20,11 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from api import views
+from landing import views as lviews
 #from api import urls
 urlpatterns = [
     path('', include('landing.urls')),
+    path('inverdana', lviews.inverdana_site, name="Inverdana"),
     path('admin/', admin.admin.urls),
     path('api/', include('api.urls')),
     path('', include('landing.urls')),

@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='event',
             name='date',
-            field=models.DateField(default=datetime.date(2019, 11, 8)),
+            field=models.DateField(default='2012-09-04'),
         ),
     ]
