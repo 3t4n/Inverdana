@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='date',
-            field=models.DateField(default=1),
+            field=models.DateField(default='2012-09-04'),
             preserve_default=False,
         ),
         migrations.AlterField(

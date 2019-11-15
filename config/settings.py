@@ -167,6 +167,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = BASE_DIR+'/static/media/'
 MEDIA_URL = '/media/'
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyAOdynB-jRfE0ezIipEABEpnPLcAc5sLsM'
 #Indentification Module
 
 IDENTIFIER_STATUS = [

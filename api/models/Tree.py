@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models as geomodels
+from django_google_maps.fields import AddressField, GeoLocationField
 
 class TreeSpecie(models.Model):
     commonname = models.CharField(max_length=100, blank=False)
@@ -16,6 +17,8 @@ class Tree(models.Model):
     shareholders = models.ManyToManyField(User, through='Share')
     name = models.CharField(max_length=100, blank=False)
     age = models.IntegerField(default=0)
+    address = AddressField(max_length=100, default='add')
+    geolocation = GeoLocationField(blank=True)
     point = geomodels.PointField()
     class Meta:
         verbose_name_plural = "Árboles"
