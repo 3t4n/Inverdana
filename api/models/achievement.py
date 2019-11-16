@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import Contact
+from django.contrib.auth.models import User
+from . import Contact
 
 
 class AchievementCatalog(models.Model):
@@ -18,4 +19,4 @@ class AchievementCatalog(models.Model):
 
 
 class Achievement(models.Model):
-    
+    dateCreated = models.DateField(auto_now_add=True)
