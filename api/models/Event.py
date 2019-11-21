@@ -6,6 +6,7 @@ class Event(models.Model):
     name = models.CharField(max_length=100, blank=False)
     info = models.TextField(max_length=300, blank=False)
     size = models.IntegerField(default=0)
+    date = models.DateTimeField()
     place = geomodels.PointField()
     class Meta:
         verbose_name_plural = "Eventos"
