@@ -1,6 +1,7 @@
 from api.models import Event
 from .forms.admin.login import *
 from django.contrib.admin import AdminSite,ModelAdmin
+from django.contrib.auth.admin import UserAdmin
 from .models import *
 from django.contrib.auth.models import *
 from .modeladmins import *
