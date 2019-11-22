@@ -47,7 +47,9 @@ urlpatterns = [
     'put': 'me',
     'patch': 'me'
     })),
-    
+    path('users/reset_password/', UserViewSet.as_view({
+        'post':'reset_password'
+        })),
     path('auth/login/', views.TokenCreateView.as_view()),
     path('auth/logout/', views.TokenDestroyView.as_view()),
 #    url(r'^auth/', include('djoser.urls')),
