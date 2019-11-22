@@ -46,9 +46,10 @@ class TreeSpecieSerializer(serializers.ModelSerializer):
 
 #Events
 class EventSerializer(serializers.ModelSerializer):
+    photo_thumbnail = serializers.ImageField()
     class Meta:
         model = Event.Event
-        fields = ['name','info']
+        fields = ['name','info','photo_thumbnail','initial_date']
 
 class PhotoSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
