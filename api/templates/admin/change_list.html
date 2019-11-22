@@ -48,7 +48,9 @@
         </p>
         {{ cl.formset.non_form_errors }}
     {% endif %}
-    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+    </div>
+                <div class="card-body">
+<div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
       {% block search %}{% search_form cl %}{% endblock %}
       {% block date_hierarchy %}{% if cl.date_hierarchy %}{% date_hierarchy cl %}{% endif %}{% endblock %}
 
@@ -61,8 +63,7 @@
         {% endif %}
       {% endblock %}
     </div>
-    </div>
-                <div class="card-body">
+    
       <form id="changelist-form" method="post"{% if cl.formset and cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
    {% block object-tools %}
         <ul class="object-tools">
