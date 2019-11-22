@@ -1,4 +1,3 @@
-from api.models import Event
 from .forms.admin.login import *
 from django.contrib.admin import AdminSite,ModelAdmin
 from .models import *
