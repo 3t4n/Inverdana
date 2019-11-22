@@ -23,4 +23,21 @@ class TreeAdmin(ModelAdmin):
         return obj.specie_id
     especie.short_description = "Especie"
         
+class EventAdmin(ModelAdmin):
+    model=Event.Event
+    search_fields =('name',)
+    list_display=('nombre','info','inicio','final')
+    list_filter = ('initial_date','final_date')
+    def nombre(self,obj):
+        return obj.name
+    nombre.short_description = "Nombre del evento"
+    def info(self,obj):
+        return obj.info
+    info.short_description ="Información"
+    def inicio(self,obj):
+        return obj.initial_date
+    inicio.short_description = "Fecha de inicio"
+    def final(self,obj):
+        return obj.final_date
+    final.short_description = "Fecha de final"
 
