@@ -51,6 +51,12 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event.Event
         fields = ['name','info','photo_thumbnail','initial_date']
 
+#Suggestions
+class SuggestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Suggestions.Suggestion
+        fields = ['title','description']
+
 class PhotoSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
     class Meta:

@@ -47,6 +47,10 @@ urlpatterns = [
     'put': 'me',
     'patch': 'me'
     })),
+    path('suggestion/', SuggestionsViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+    })),
     path('users/reset_password/', UserViewSet.as_view({
         'post':'reset_password'
         })),
