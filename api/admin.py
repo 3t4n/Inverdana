@@ -1,5 +1,6 @@
 from .forms.admin.login import *
 from django.contrib.admin import AdminSite,ModelAdmin
+from django.contrib.auth.admin import UserAdmin
 from .models import *
 from django.contrib.auth.models import *
 from .modeladmins import *
@@ -22,7 +23,7 @@ admin = AdminSite(name='Inverdana')
 admin.register(Contact.Contact)
 admin.register(WorldBorder.WorldBorder)
 admin.register(Preference.Preference)
-admin.register(Tree.Tree)
+admin.register(Tree.Tree,TreeAdmin)
 admin.register(Tree.TreeSpecie)
 admin.register(Tree.Share)
 admin.register(Photo.Photo)
@@ -30,6 +31,6 @@ admin.register(Identifier.QRcode,QrCodeAdmin)
 admin.register(User)
 admin.register(Permission)
 admin.register(Group)
-admin.register(Event.Event)
+admin.register(Event.Event,EventAdmin)
 admin.register(Tree.HasState)
 admin.register(Tree.TreeState)
