@@ -4,6 +4,8 @@ from django.db import models
 class Suggestion(models.Model):
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField(max_length=300, blank=False)
+    seen = models.BooleanField(default=False)
+    dateCreated = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Sugerencias"

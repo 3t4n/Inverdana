@@ -12,6 +12,14 @@ class TreeSpecie(models.Model):
     def __str__(self):
         return '%s' % (self.commonname)
 
+class TreeTip(models.Model):
+    title = models.CharField(max_length=255, blank=False)
+    tip = models.TextField(max_length=255, blank=False)
+    tree_id = models.ForeignKey(TreeSpecie,on_delete=models.CASCADE, related_name="tips")
+    def __str__(self):
+        return '%s %s' % (self.title,self.tree_id)
+
+
 class TreeState(models.Model):
     name = models.CharField(max_length=100, blank=False)
     class Meta:
@@ -31,6 +39,13 @@ class Tree(models.Model):
     class Meta:
         verbose_name_plural = "Árboles"
         verbose_name="árbol"
+    
+    def x(self):
+        return self.point.x
+    
+    def y(self):
+        return self.point.y
+
     def __str__(self):
         return 'Nombre: %s, Especie: %s' % (self.name, self.specie_id)
 

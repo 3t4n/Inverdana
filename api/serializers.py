@@ -38,11 +38,17 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact.Contact
         fields = [ 'cellphone','country','birthday']
 
+class TreeTipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tree.TreeTip
+        fields = ['title','tip']
+
 
 class TreeSpecieSerializer(serializers.ModelSerializer):
+    tips = TreeTipSerializer(many=True)
     class Meta:
         model = Tree.TreeSpecie
-        fields = ['id','commonname']
+        fields = ['id','commonname','tips']
 
 #Events
 class EventSerializer(serializers.ModelSerializer):
@@ -70,9 +76,10 @@ class PhotosSerializer(serializers.ModelSerializer):
 
 class TreeSerializer(serializers.ModelSerializer):
     photos = PhotoSerializer(many=True,required=False,read_only=True)
+    specie_id = TreeSpecieSerializer(many=False)
     class Meta: 
         model = Tree.Tree
-        fields = ['id','specie_id','name','age','identifiers','photos','point']
+        fields = ['id','specie_id','name','age','identifiers','photos','point','x','y']
 
 class ShareSerializer(serializers.ModelSerializer):
     tree = TreeSerializer(many=False)
