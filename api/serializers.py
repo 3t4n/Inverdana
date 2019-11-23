@@ -81,7 +81,7 @@ class UserSerializer(serializers.ModelSerializer):
     shares = ShareSerializer(many=True)
     class Meta:
         model = User
-        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences','shares'])
+        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences','shares','first_name','last_name'])
         read_only_fields = (settings.LOGIN_FIELD,)
 
     def update(self, instance, validated_data):
