@@ -50,6 +50,17 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event.Event
         fields = ['name','info','photo_thumbnail','initial_date']
+        use_natural_foreign_keys = True
+        use_natural_primary_keys = True
+
+#Feed
+class FeedSerializer(serializers.ModelSerializer):
+    photo_thumbnail = serializers.ImageField(read_only=True)
+    username = serializers.CharField(source='user.username',read_only=True)
+
+    class Meta:
+        model = Feed.Post
+        fields = ['user','username','info','photo_thumbnail', 'photo']
 
 #Suggestions
 class SuggestionSerializer(serializers.ModelSerializer):

@@ -44,6 +44,10 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.Event.objects.all()
     serializer_class = EventSerializer
 
+class FeedViewSet(viewsets.ModelViewSet):
+    queryset = Feed.Post.objects.all()
+    serializer_class = FeedSerializer
+
 class SuggestionsViewSet(viewsets.ModelViewSet):
     queryset = Suggestions.Suggestion.objects.all()
     serializer_class = SuggestionSerializer
