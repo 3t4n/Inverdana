@@ -11,6 +11,7 @@ from djoser.conf import settings
 
 from api.models import Event
 from .models import *
+from users.models import *
 
 ##Get the current User Class defined in setting.py
 User = get_user_model()
@@ -38,11 +39,17 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact.Contact
         fields = [ 'cellphone','country','birthday']
 
+class TreeTipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tree.TreeTip
+        fields = ['title','tip']
+
 
 class TreeSpecieSerializer(serializers.ModelSerializer):
+    tips = TreeTipSerializer(many=True)
     class Meta:
         model = Tree.TreeSpecie
-        fields = ['id','commonname']
+        fields = ['id','commonname','tips']
 
 #Events
 class EventSerializer(serializers.ModelSerializer):
@@ -50,6 +57,23 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event.Event
         fields = ['name','info','photo_thumbnail','initial_date']
+        use_natural_foreign_keys = True
+        use_natural_primary_keys = True
+
+#Feed
+class FeedSerializer(serializers.ModelSerializer):
+    photo_thumbnail = serializers.ImageField(read_only=True)
+    username = serializers.CharField(source='user.username',read_only=True)
+
+    class Meta:
+        model = Feed.Post
+        fields = ['user','username','info','photo_thumbnail', 'photo','dateCreated']
+
+#Suggestions
+class SuggestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Suggestions.Suggestion
+        fields = ['title','description']
 
 class PhotoSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
@@ -64,9 +88,10 @@ class PhotosSerializer(serializers.ModelSerializer):
 
 class TreeSerializer(serializers.ModelSerializer):
     photos = PhotoSerializer(many=True,required=False,read_only=True)
+    specie_id = TreeSpecieSerializer(many=False)
     class Meta: 
         model = Tree.Tree
-        fields = ['id','specie_id','name','age','identifiers','photos','point']
+        fields = ['id','specie_id','name','age','identifiers','photos','point','x','y']
 
 class ShareSerializer(serializers.ModelSerializer):
     tree = TreeSerializer(many=False)

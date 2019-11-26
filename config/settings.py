@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'imagekit',
     'filters',
     'landing',
+    'users',
     ]
 
 CORS_ORIGIN_ALLOW_ALL = True

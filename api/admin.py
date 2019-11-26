@@ -2,6 +2,7 @@ from .forms.admin.login import *
 from django.contrib.admin import AdminSite,ModelAdmin
 from django.contrib.auth.admin import UserAdmin
 from .models import *
+from users.models import *
 from django.contrib.auth.models import *
 from .modeladmins import *
 
@@ -14,6 +15,8 @@ class AdminSite(AdminSite):
         extra_context = extra_context or {}
         extra_context['usersCount'] = User.objects.all().count()
         extra_context['treesCount'] = Tree.Tree.objects.all().count()
+        extra_context['treesStockCount'] = Stock.Stock.objects.all().count()
+        extra_context['eventsCount'] = Event.Event.objects.all().count()
         return super(AdminSite,self).index(request,extra_context)
 
 admin = AdminSite(name='Inverdana')
@@ -36,4 +39,7 @@ admin.register(Tree.HasState)
 admin.register(Tree.TreeState)
 admin.register(Achievement.Achievement)
 admin.register(Achievement.AchievementCatalog)
-
+admin.register(Tree.TreeTip)
+admin.register(Suggestions.Suggestion,SuggestionAdmin)
+admin.register(Feed.Post)
+admin.register(Stock.Stock)
