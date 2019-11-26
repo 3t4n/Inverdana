@@ -37,15 +37,14 @@ class Tree(models.Model):
     age = models.IntegerField(default=0, verbose_name="Edad")
     point = geomodels.PointField()
     class Meta:
-        verbose_name_plural = "Árboles"
-        verbose_name="árbol"
+        verbose_name_plural = "Árboles de usuarios"
+        verbose_name="árbol de usuario"
     
     def x(self):
         return self.point.x
     
     def y(self):
         return self.point.y
-
     def __str__(self):
         return 'Nombre: %s, Especie: %s' % (self.name, self.specie_id)
 

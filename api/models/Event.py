@@ -5,11 +5,11 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
 class Event(models.Model):
-    name = models.CharField(max_length=100, blank=False)
-    info = models.TextField(max_length=300, blank=False)
-    size = models.IntegerField(default=0)
-    initial_date = models.DateTimeField()
-    final_date = models.DateTimeField()
+    name = models.CharField(max_length=100, blank=False, verbose_name="Nombre")
+    info = models.TextField(max_length=900, blank=False, verbose_name="Descripción")
+    size = models.IntegerField(default=0, verbose_name="Cantidad de Asistentes")
+    initial_date = models.DateTimeField(verbose_name="Fecha Inicial")
+    final_date = models.DateTimeField(verbose_name="Fecha Final")
     place = geomodels.PointField()
     photo = models.ImageField(upload_to='events')
     photo_thumbnail = ImageSpecField(source='photo',

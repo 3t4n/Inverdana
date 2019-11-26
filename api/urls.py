@@ -53,6 +53,10 @@ urlpatterns = [
     'get': 'list',
     'post': 'create'
     })),
+    path('Feed/', FeedViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+    })),
     path('users/reset_password/', UserViewSet.as_view({
         'post':'reset_password'
         })),
