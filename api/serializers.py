@@ -8,6 +8,7 @@ from djoser import utils
 from  djoser.serializers import UserCreateSerializer
 from djoser.compat import get_user_email, get_user_email_field_name
 from djoser.conf import settings
+from drf_extra_fields.fields import Base64ImageField
 
 from api.models import Event
 from .models import *
@@ -50,7 +51,10 @@ class TreeSpecieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tree.TreeSpecie
         fields = ['id','commonname','tips']
-
+class TreeState(serializers.ModelSerializer):
+    class Meta:
+        model = Tree.TreeState
+        field = ['id','name']
 #Events
 class EventSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
@@ -64,7 +68,7 @@ class EventSerializer(serializers.ModelSerializer):
 class FeedSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField(read_only=True)
     username = serializers.CharField(source='user.username',read_only=True)
-
+    photo = Base64ImageField()
     class Meta:
         model = Feed.Post
         fields = ['user','username','info','photo_thumbnail', 'photo','dateCreated']
