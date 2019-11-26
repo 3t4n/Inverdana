@@ -1,5 +1,5 @@
 from django.db.models.signals import pre_save
-from . import Contact,WorldBorder,Preference,GeoEntity,Tree,Photo,Identifier, Event,Suggestions,Feed
+from . import Contact,WorldBorder,Preference,GeoEntity,Tree,Photo,Identifier, Event,Suggestions,Feed,Stock
 from django.utils.crypto import get_random_string
 from django.conf import settings as appsettings
 import qrcode
