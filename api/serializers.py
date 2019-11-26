@@ -60,7 +60,7 @@ class FeedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Feed.Post
-        fields = ['user','username','info','photo_thumbnail', 'photo']
+        fields = ['user','username','info','photo_thumbnail', 'photo','dateCreated']
 
 #Suggestions
 class SuggestionSerializer(serializers.ModelSerializer):

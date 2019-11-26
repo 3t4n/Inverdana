@@ -8,7 +8,8 @@ from imagekit.processors import ResizeToFill
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
     info = models.TextField(max_length=300, blank=False)
-    photo = models.ImageField(upload_to='posts')
+    photo = models.ImageField(upload_to='posts', null=True)
+    dateCreated = models.DateTimeField(auto_now_add=True)
     photo_thumbnail = ImageSpecField(source='photo',
                                      processors=[ResizeToFill(250, 250)],
                                      format='JPEG',

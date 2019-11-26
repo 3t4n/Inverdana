@@ -47,6 +47,11 @@ class EventViewSet(viewsets.ModelViewSet):
 class FeedViewSet(viewsets.ModelViewSet):
     queryset = Feed.Post.objects.all()
     serializer_class = FeedSerializer
+    filter_backends = (filters.OrderingFilter,)
+    filter_mappings = {
+        'user': 'user',
+        'dateCreated': 'dateCreated',
+    }
 
 class SuggestionsViewSet(viewsets.ModelViewSet):
     queryset = Suggestions.Suggestion.objects.all()
