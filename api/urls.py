@@ -53,7 +53,7 @@ urlpatterns = [
     'get': 'list',
     'post': 'create'
     })),
-    path('Feed/', FeedViewSet.as_view({
+    path('feed/', FeedViewSet.as_view({
     'get': 'list',
     'post': 'create'
     })),
