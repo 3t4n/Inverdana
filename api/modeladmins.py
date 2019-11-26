@@ -57,3 +57,13 @@ class SuggestionAdmin(ModelAdmin ):
         return obj.seen
     visto.short_description = "Visto"
 
+class OrganizationAdmin(ModelAdmin):
+    list_per_page = 5
+    list_display = ('nombre','numero')
+    def nombre(self,obj):
+        return obj.name
+    nombre.short_description = "Nombre"
+    def numero(self,obj):
+        return obj.numero
+    numero.short_description = "Numero"
+

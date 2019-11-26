@@ -36,9 +36,10 @@ class WorldBorderSerializer(serializers.ModelSerializer):
         fields = ['iso2','name']
 
 class ContactSerializer(serializers.ModelSerializer):
+    photo = Base64ImageField()
     class Meta:
         model = Contact.Contact
-        fields = [ 'cellphone','country','birthday']
+        fields = ['cellphone','country','birthday','photo']
 
 class TreeTipSerializer(serializers.ModelSerializer):
     class Meta:
