@@ -91,9 +91,47 @@
 	</div>
     {% endfor %}
 </div>
+    <div class="row">
+	    <div class="app-api col-md-12">
+	    <div class="card">
+		    <div class="card-header card-header-primary">
+                  <h4 class="card-title "><a href="/admin/api/" class="section" title="Modelos en la aplicación Módulo de árboles">{% trans 'Recent actions' %}</a>
+		  </h4>
+		  <p class="card-category"></p>
+		    </div>
+		     {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% trans 'None available' %}</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+	    {{entry.action_time}}
+	    {{entry.user}}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+	    </div>
+	    </div>
+    </div>
 </div>
 </div>
 </div>
+
+
 {% else %}
     <p>{% trans "You don't have permission to view or edit anything." %}</p>
 {% endif %}

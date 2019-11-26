@@ -34,3 +34,6 @@ admin.register(Group)
 admin.register(Event.Event,EventAdmin)
 admin.register(Tree.HasState)
 admin.register(Tree.TreeState)
+admin.register(Achievement.Achievement)
+admin.register(Achievement.AchievementCatalog)
+

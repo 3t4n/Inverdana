@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from . import WorldBorder
+from . import WorldBorder,Achievement
 
 class Contact(models.Model):
     cellphone=models.CharField(max_length=50)
