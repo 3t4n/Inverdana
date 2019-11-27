@@ -1,1 +1,1 @@
-from . import Suggestions,Event,Feed,Organization
+from . import Suggestions,Event,Feed,Organization,Clan

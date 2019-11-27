@@ -105,13 +105,19 @@ class ShareSerializer(serializers.ModelSerializer):
         model = Tree.Share
         fields = ['user_id','id','dateCreated','dateModified','percentage','owner','tree_id','tree']
 
+class MembershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clan.MemberShip
+        fields = ['clan_id','date_joined']
+
 class UserSerializer(serializers.ModelSerializer):
     preferences = PreferenceSerializer()
     info = ContactSerializer()
     shares = ShareSerializer(many=True)
+    clans = MembershipSerializer(many=True)
     class Meta:
         model = User
-        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences','shares','first_name','last_name'])
+        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences','shares','first_name','last_name','clans'])
         read_only_fields = (settings.LOGIN_FIELD,)
 
     def update(self, instance, validated_data):
