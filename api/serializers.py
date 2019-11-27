@@ -48,7 +48,7 @@ class TreeTipSerializer(serializers.ModelSerializer):
 
 
 class TreeSpecieSerializer(serializers.ModelSerializer):
-    tips = TreeTipSerializer(many=True)
+    tips = TreeTipSerializer(many=True,read_only=True)
     class Meta:
         model = Tree.TreeSpecie
         fields = ['id','commonname','tips']
@@ -105,18 +105,24 @@ class PhotosSerializer(serializers.ModelSerializer):
 
 class TreeSerializer(serializers.ModelSerializer):
     photos = PhotoSerializer(many=True,required=False,read_only=True)
-    specie_id = TreeSpecieSerializer(many=False)
-    states = TreeHasState(many=True)
+   # specie_id = TreeSpecieSerializer(many=False,read_only=True)
+    states = TreeHasState(many=True,read_only=True)
+    specie = serializers.CharField(source='specie_id.commonname',read_only=True)
     class Meta: 
         model = Tree.Tree
-        fields = ['id','specie_id','name','age','identifiers','photos','point','x','y','states']
+        fields = ['id','specie_id','name','age','identifiers','photos','point','x','y','states','specie']
 
 class ShareSerializer(serializers.ModelSerializer):
-    tree = TreeSerializer(many=False)
+    tree = TreeSerializer(many=False,read_only=True)
     tree_id = serializers.IntegerField(source='tree.id')
     class Meta:
         model = Tree.Share
         fields = ['user_id','id','dateCreated','dateModified','percentage','owner','tree_id','tree']
+    def create(self, validated_data):
+        print(validated_data)
+        tree = Tree.Tree.objects.get(pk=validated_data.pop('tree')['id'])
+        instance =  Tree.Share.objects.create(tree=tree,**validated_data)
+        return instance
 
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
