@@ -73,7 +73,12 @@ class SharesViewSet(viewsets.ModelViewSet):
         'tree_id': 'tree_id',
     }
 
+def login(request):
+    return render(request, 'login.html')
 
+
+def logintest():
+    return '<h1>prueba</h1>'
 
 
 @login_required
