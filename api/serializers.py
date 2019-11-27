@@ -55,7 +55,19 @@ class TreeSpecieSerializer(serializers.ModelSerializer):
 class TreeState(serializers.ModelSerializer):
     class Meta:
         model = Tree.TreeState
-        field = ['id','name']
+        fields = ['id','name']
+
+class TreeHasState(serializers.ModelSerializer):
+    state = TreeState(many=False)
+    class Meta:
+        model = Tree.HasState
+        fields = ['dateCreated','state']
+#Pure 
+class HasState(serializers.ModelSerializer):
+    class Meta:
+        model = Tree.HasState
+        fields = ['state','tree']
+#
 #Events
 class EventSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
@@ -94,9 +106,10 @@ class PhotosSerializer(serializers.ModelSerializer):
 class TreeSerializer(serializers.ModelSerializer):
     photos = PhotoSerializer(many=True,required=False,read_only=True)
     specie_id = TreeSpecieSerializer(many=False)
+    states = TreeHasState(many=True)
     class Meta: 
         model = Tree.Tree
-        fields = ['id','specie_id','name','age','identifiers','photos','point','x','y']
+        fields = ['id','specie_id','name','age','identifiers','photos','point','x','y','states']
 
 class ShareSerializer(serializers.ModelSerializer):
     tree = TreeSerializer(many=False)

@@ -32,7 +32,7 @@ class TreeState(models.Model):
 class Tree(models.Model):
     specie_id = models.ForeignKey(TreeSpecie, on_delete=models.SET_NULL, null=True, verbose_name="Especie")
     shareholders = models.ManyToManyField(User, through='Share')
-    states = models.ManyToManyField(TreeState, through='HasState')
+    state = models.ManyToManyField(TreeState, through='HasState')
     name = models.CharField(max_length=100, blank=False)
     age = models.IntegerField(default=0, verbose_name="Edad")
     point = geomodels.PointField()
@@ -49,7 +49,7 @@ class Tree(models.Model):
         return 'Nombre: %s, Especie: %s' % (self.name, self.specie_id)
 
 class HasState(models.Model):
-    tree = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True)
+    tree = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True, related_name="states")
     state = models.ForeignKey(TreeState, on_delete=models.SET_NULL, null=True)
     dateCreated = models.DateField(auto_now_add=True)
     class Meta:
