@@ -30,7 +30,7 @@ router.register(r'species', TreeSpecieViewSet)
 router.register(r'shares', SharesViewSet)
 router.register(r'photos', PhotosViewSet)
 router.register(r'worldborders', WorldBorderViewSet)
-#router.register(r'events', EventViewSet)
+router.register(r'events', EventViewSet)
 
 urlpatterns = [
     #Ejemplo
@@ -41,8 +41,8 @@ urlpatterns = [
     'put': 'update',
     'patch': 'partial_update'
     })),
-    path('events/', EventViewSet.as_view({'get':'list'}))
-    ,
+    ##path('events/', EventViewSet.as_view({'get':'list'}))
+    ##,
     path('users/me/', UserViewSet.as_view({
     'get': 'me',
     'delete': 'me',
