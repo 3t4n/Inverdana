@@ -57,6 +57,11 @@ class SuggestionsViewSet(viewsets.ModelViewSet):
     queryset = Suggestions.Suggestion.objects.all()
     serializer_class = SuggestionSerializer
 
+class StatesViewSet(viewsets.ModelViewSet):
+    queryset = Tree.TreeState.objects.all()
+    serializer_class = SuggestionSerializer
+
+
 #class SharesViewSet(FiltersMixin,viewsets.ModelViewSet):
 class SharesViewSet(viewsets.ModelViewSet):
 
@@ -69,12 +74,6 @@ class SharesViewSet(viewsets.ModelViewSet):
     }
 
 
-def login(request):
-    return render(request, 'login.html')
-
-
-def logintest():
-    return '<h1>prueba</h1>'
 
 
 @login_required
