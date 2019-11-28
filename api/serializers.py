@@ -100,6 +100,7 @@ class PhotoSerializer(serializers.ModelSerializer):
         fields = ['id','photo','photo_thumbnail']
 
 class PhotosSerializer(serializers.ModelSerializer):
+    photo = Base64ImageField()
     class Meta:
         model = Photo.Photo
         fields = ['id','photo','tree_id']
