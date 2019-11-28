@@ -72,9 +72,10 @@ class HasState(serializers.ModelSerializer):
 #Events
 class EventSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
+    photo = Base64ImageField()
     class Meta:
         model = Event.Event
-        fields = ['name','info','photo_thumbnail','initial_date']
+        fields = ['name','info','photo_thumbnail','photo','initial_date']
         use_natural_foreign_keys = True
         use_natural_primary_keys = True
 
