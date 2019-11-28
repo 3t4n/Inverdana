@@ -65,6 +65,7 @@ class TreeHasState(serializers.ModelSerializer):
 #Pure 
 class HasState(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField(read_only=True)
+    photo = Base64ImageField()
     class Meta:
         model = Tree.HasState
         fields = ['state','tree','photo','photo_thumbnail','description']
