@@ -15,3 +15,6 @@ class Preference(models.Model):
         verbose_name_plural = "Preferencias"
     def __str__(self):
         return 'User ID= %s' % (self.user_id)
+    class Meta:
+        verbose_name_plural = "Preferencias de usuario"
+        verbose_name = "Preferencia"
