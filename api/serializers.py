@@ -64,6 +64,7 @@ class TreeHasState(serializers.ModelSerializer):
         fields = ['dateCreated','state']
 #Pure 
 class HasState(serializers.ModelSerializer):
+    state = TreeState(many=False)
     photo_thumbnail = serializers.ImageField(read_only=True)
     photo = Base64ImageField()
     class Meta:
