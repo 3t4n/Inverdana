@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models as geomodels
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 class TreeSpecie(models.Model):
     commonname = models.CharField(max_length=100, blank=False)
@@ -51,7 +53,13 @@ class Tree(models.Model):
 class HasState(models.Model):
     tree = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True, related_name="states")
     state = models.ForeignKey(TreeState, on_delete=models.SET_NULL, null=True)
-    dateCreated = models.DateField(auto_now_add=True)
+    photo = models.ImageField(upload_to='reports', null=True)
+    dateCreated = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(max_length=300, blank=False, null=True)
+    photo_thumbnail = ImageSpecField(source='photo',
+                                     processors=[ResizeToFill(250, 250)],
+                                     format='JPEG',
+                                     options={'quality': 60})
     class Meta:
         verbose_name_plural = "Estados"
         verbose_name="estado"

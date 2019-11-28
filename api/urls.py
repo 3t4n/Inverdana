@@ -32,6 +32,7 @@ router.register(r'photos', PhotosViewSet)
 router.register(r'worldborders', WorldBorderViewSet)
 router.register(r'events', EventViewSet)
 
+
 urlpatterns = [
     #Ejemplo
     path('users/', views.UserViewSet.as_view({
@@ -40,6 +41,10 @@ urlpatterns = [
     'delete': 'destroy',
     'put': 'update',
     'patch': 'partial_update'
+    })),
+    path('reports/', TreeStateViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
     })),
     ##path('events/', EventViewSet.as_view({'get':'list'}))
     ##,

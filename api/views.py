@@ -27,6 +27,10 @@ class TreeViewSet(viewsets.ModelViewSet):
     queryset = Tree.Tree.objects.all()
     serializer_class = TreeSerializer
 
+class TreeStateViewSet(viewsets.ModelViewSet):
+    queryset = Tree.HasState.objects.all()
+    serializer_class = HasState
+
 class TreeSpecieViewSet(viewsets.ModelViewSet):
     queryset = Tree.TreeSpecie.objects.all()
     serializer_class = TreeSpecieSerializer

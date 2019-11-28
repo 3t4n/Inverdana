@@ -64,9 +64,10 @@ class TreeHasState(serializers.ModelSerializer):
         fields = ['dateCreated','state']
 #Pure 
 class HasState(serializers.ModelSerializer):
+    photo_thumbnail = serializers.ImageField()
     class Meta:
         model = Tree.HasState
-        fields = ['state','tree']
+        fields = ['state','tree','photo','photo_thumbnail']
 #
 #Events
 class EventSerializer(serializers.ModelSerializer):
