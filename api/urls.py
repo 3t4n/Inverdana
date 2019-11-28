@@ -31,6 +31,7 @@ router.register(r'shares', SharesViewSet)
 router.register(r'photos', PhotosViewSet)
 router.register(r'worldborders', WorldBorderViewSet)
 router.register(r'events', EventViewSet)
+router.register(r'states', StatesViewSet)
 
 
 urlpatterns = [

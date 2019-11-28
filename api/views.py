@@ -27,6 +27,10 @@ class TreeViewSet(viewsets.ModelViewSet):
     queryset = Tree.Tree.objects.all()
     serializer_class = TreeSerializer
 
+class StatesViewSet(viewsets.ModelViewSet):
+    queryset = Tree.TreeState.objects.all()
+    serializer_class = TreeState
+
 class TreeStateViewSet(viewsets.ModelViewSet):
     queryset = Tree.HasState.objects.all()
     serializer_class = HasState
@@ -61,9 +65,9 @@ class SuggestionsViewSet(viewsets.ModelViewSet):
     queryset = Suggestions.Suggestion.objects.all()
     serializer_class = SuggestionSerializer
 
-class StatesViewSet(viewsets.ModelViewSet):
-    queryset = Tree.TreeState.objects.all()
-    serializer_class = SuggestionSerializer
+#class StatesViewSet(viewsets.ModelViewSet):
+#    queryset = Tree.TreeState.objects.all()
+    #serializer_class = SuggestionSerializer
 
 
 #class SharesViewSet(FiltersMixin,viewsets.ModelViewSet):
