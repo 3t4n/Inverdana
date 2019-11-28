@@ -20,6 +20,9 @@ class TreeTip(models.Model):
     tree_id = models.ForeignKey(TreeSpecie,on_delete=models.CASCADE, related_name="tips")
     def __str__(self):
         return '%s %s' % (self.title,self.tree_id)
+    class Meta:
+        verbose_name_plural = "Tips de árboles"
+        verbose_name="tip"
 
 
 class TreeState(models.Model):
