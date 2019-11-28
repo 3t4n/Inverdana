@@ -13555,11 +13555,11 @@ legend {
 }
 
 a {
-	color: #74b49b;
+	color: #658A6D;
 }
 
 a:focus,a:hover {
-	color: #5c8d89;
+	color: #4B705F;
 	text-decoration: none;
 }
 
@@ -13916,19 +13916,19 @@ pacity .45s;
 }
 
 .card.bg-primary,.card .card-header-primary .card-icon,.card .card-header-primary .card-text,.card .card-header-primary:not(.card-header-icon):not(.card-header-text),.card.card-rotate.bg-primary .back,.card.card-rotate.bg-primary .front {
-	background: linear-gradient(60deg,#74b49b,#5c8d89);
+	background: linear-gradient(60deg,#4b705f,#c9ea9b);
 }
 
 .card.bg-info,.card .card-header-info .card-icon,.card .card-header-info .card-text,.card .card-header-info:not(.card-header-icon):not(.card-header-text),.card.card-rotate.bg-info .back,.card.card-rotate.bg-info .front {
-	background: linear-gradient(60deg,#26c6da,#00acc1);
+	background: linear-gradient(60deg,#c9ea9b,#4b705f);
 }
 
 .card.bg-success,.card .card-header-success .card-icon,.card .card-header-success .card-text,.card .card-header-success:not(.card-header-icon):not(.card-header-text),.card.card-rotate.bg-success .back,.card.card-rotate.bg-success .front {
-	background: linear-gradient(60deg,#66bb6a,#43a047);
+	background: linear-gradient(60deg,#c9ea9b,#4b705f);
 }
 
 .card.bg-warning,.card .card-header-warning .card-icon,.card .card-header-warning .card-text,.card .card-header-warning:not(.card-header-icon):not(.card-header-text),.card.card-rotate.bg-warning .back,.card.card-rotate.bg-warning .front {
-	background: linear-gradient(60deg,#ffa726,#fb8c00);
+	background: linear-gradient(60deg,#c9ea9b,#4b705f);
 }
 
 .card.bg-danger,.card .card-header-danger .card-icon,.card .card-header-danger .card-text,.card .card-header-danger:not(.card-header-icon):not(.card-header-text),.card.card-rotate.bg-danger .back,.card.card-rotate.bg-danger .front {

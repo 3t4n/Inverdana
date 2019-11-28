@@ -31,6 +31,8 @@ router.register(r'shares', SharesViewSet)
 router.register(r'photos', PhotosViewSet)
 router.register(r'worldborders', WorldBorderViewSet)
 router.register(r'events', EventViewSet)
+router.register(r'states', StatesViewSet)
+
 
 urlpatterns = [
     #Ejemplo
@@ -41,11 +43,28 @@ urlpatterns = [
     'put': 'update',
     'patch': 'partial_update'
     })),
+    path('reports/', TreeStateViewSet.as_view({
+    'get': 'list',
+    'post': 'create',
+    })),
+    ##path('events/', EventViewSet.as_view({'get':'list'}))
+    ##,
     path('users/me/', UserViewSet.as_view({
     'get': 'me',
     'delete': 'me',
     'put': 'me',
     'patch': 'me'
+    })),
+    path('users/me/password', UserViewSet.as_view({
+    'post': 'set_password',
+    })),
+    path('suggestions/', SuggestionsViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+    })),
+    path('feed/', FeedViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
     })),
     path('users/reset_password/', UserViewSet.as_view({
         'post':'reset_password'

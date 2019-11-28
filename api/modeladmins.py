@@ -1,5 +1,6 @@
 from django.contrib.admin import ModelAdmin
 from .models import *
+from users.models import *
 
 class QrCodeAdmin(ModelAdmin):
     model = Identifier.QRcode
@@ -40,4 +41,29 @@ class EventAdmin(ModelAdmin):
     def final(self,obj):
         return obj.final_date
     final.short_description = "Fecha de final"
+
+class SuggestionAdmin(ModelAdmin ):
+    model=Suggestions.Suggestion
+    list_display=('titulo','descripcion')
+    list_filter = ('seen','dateCreated')
+    list_per_page = 5
+    def titulo(self,obj):
+        return obj.title
+    titulo.short_description = "Título"
+    def descripcion(self,obj):
+        return obj.description
+    descripcion.short_description = "Descripcion"
+    def visto(self,obj):
+        return obj.seen
+    visto.short_description = "Visto"
+
+class OrganizationAdmin(ModelAdmin):
+    list_per_page = 5
+    list_display = ('nombre','numero')
+    def nombre(self,obj):
+        return obj.name
+    nombre.short_description = "Nombre"
+    def numero(self,obj):
+        return obj.numero
+    numero.short_description = "Numero"
 

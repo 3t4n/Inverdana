@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models as geomodels
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 class TreeSpecie(models.Model):
     commonname = models.CharField(max_length=100, blank=False)
@@ -11,6 +13,14 @@ class TreeSpecie(models.Model):
         verbose_name="especie de árbol"
     def __str__(self):
         return '%s' % (self.commonname)
+
+class TreeTip(models.Model):
+    title = models.CharField(max_length=255, blank=False)
+    tip = models.TextField(max_length=255, blank=False)
+    tree_id = models.ForeignKey(TreeSpecie,on_delete=models.CASCADE, related_name="tips")
+    def __str__(self):
+        return '%s %s' % (self.title,self.tree_id)
+
 
 class TreeState(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -24,20 +34,32 @@ class TreeState(models.Model):
 class Tree(models.Model):
     specie_id = models.ForeignKey(TreeSpecie, on_delete=models.SET_NULL, null=True, verbose_name="Especie")
     shareholders = models.ManyToManyField(User, through='Share')
-    states = models.ManyToManyField(TreeState, through='HasState')
+    state = models.ManyToManyField(TreeState, through='HasState')
     name = models.CharField(max_length=100, blank=False)
     age = models.IntegerField(default=0, verbose_name="Edad")
     point = geomodels.PointField()
     class Meta:
-        verbose_name_plural = "Árboles"
-        verbose_name="árbol"
+        verbose_name_plural = "Árboles de usuarios"
+        verbose_name="árbol de usuario"
+    
+    def x(self):
+        return self.point.x
+    
+    def y(self):
+        return self.point.y
     def __str__(self):
         return 'Nombre: %s, Especie: %s' % (self.name, self.specie_id)
 
 class HasState(models.Model):
-    tree = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True)
+    tree = models.ForeignKey(Tree, on_delete=models.SET_NULL, null=True, related_name="states")
     state = models.ForeignKey(TreeState, on_delete=models.SET_NULL, null=True)
-    dateCreated = models.DateField(auto_now_add=True)
+    photo = models.ImageField(upload_to='reports', null=True)
+    dateCreated = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(max_length=300, blank=False, null=True)
+    photo_thumbnail = ImageSpecField(source='photo',
+                                     processors=[ResizeToFill(250, 250)],
+                                     format='JPEG',
+                                     options={'quality': 60})
     class Meta:
         verbose_name_plural = "Estados"
         verbose_name="estado"

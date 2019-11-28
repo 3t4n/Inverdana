@@ -27,6 +27,14 @@ class TreeViewSet(viewsets.ModelViewSet):
     queryset = Tree.Tree.objects.all()
     serializer_class = TreeSerializer
 
+class StatesViewSet(viewsets.ModelViewSet):
+    queryset = Tree.TreeState.objects.all()
+    serializer_class = TreeState
+
+class TreeStateViewSet(viewsets.ModelViewSet):
+    queryset = Tree.HasState.objects.all()
+    serializer_class = HasState
+
 class TreeSpecieViewSet(viewsets.ModelViewSet):
     queryset = Tree.TreeSpecie.objects.all()
     serializer_class = TreeSpecieSerializer
@@ -44,6 +52,24 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.Event.objects.all()
     serializer_class = EventSerializer
 
+class FeedViewSet(viewsets.ModelViewSet):
+    queryset = Feed.Post.objects.all()
+    serializer_class = FeedSerializer
+    filter_backends = (filters.OrderingFilter,)
+    filter_mappings = {
+        'user': 'user',
+        'dateCreated': 'dateCreated',
+    }
+
+class SuggestionsViewSet(viewsets.ModelViewSet):
+    queryset = Suggestions.Suggestion.objects.all()
+    serializer_class = SuggestionSerializer
+
+#class StatesViewSet(viewsets.ModelViewSet):
+#    queryset = Tree.TreeState.objects.all()
+    #serializer_class = SuggestionSerializer
+
+
 #class SharesViewSet(FiltersMixin,viewsets.ModelViewSet):
 class SharesViewSet(viewsets.ModelViewSet):
 
@@ -54,7 +80,6 @@ class SharesViewSet(viewsets.ModelViewSet):
         'id': 'id',
         'tree_id': 'tree_id',
     }
-
 
 def login(request):
     return render(request, 'login.html')
