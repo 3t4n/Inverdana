@@ -23,6 +23,6 @@ from .views import *
 urlpatterns = [
         path('', home, name='index'),
         path('inverdana', inverdana_site, name='blog.html'),
-        path('docs/', docs, name='docs'),
-        path('docs/api-reference', api, name='api')
+        #path('docs/', docs, name='docs'),
+        #path('docs/api-reference', api, name='api')
         ]
