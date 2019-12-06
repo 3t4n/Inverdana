@@ -42,9 +42,9 @@
         margin-bottom: 23px;
     }
 	.header_area .navbar {
-		background-image: -moz-linear-gradient( 0deg, rgba(188,43,255,.8) 0%, rgba(114,73,251,.8) 100%);
-		background-image: -webkit-linear-gradient( 0deg, rgba(188,43,255,.8) 0%, rgba(114,73,251,.8) 100%);
-		background-image: -ms-linear-gradient( 0deg, rgba(188,43,255,.8) 0%, rgba(114,73,251,.8) 100%);
+		background-image: -moz-linear-gradient( 0deg, rgba(53, 103, 57, 0.8) 0%, rgba(89, 130, 126, 0.8) 100%);
+		background-image: -webkit-linear-gradient( 0deg, rgba(53, 103, 57, 0.8) 0%, rgba(89, 130, 126, 0.8) 100%);
+		background-image: -ms-linear-gradient( 0deg, rgba(53, 103, 57, 0.8) 0%, rgba(89, 130, 126, 0.8) 100%);
 	}
     .navbar-toggler[aria-expanded="false"] span:nth-child(2) {
 		opacity: 1;
@@ -130,7 +130,7 @@
     }
 	/* End Blog page Area css
 	============================================================================================ */
-	
+
 	/* Contact Page Area css
 	============================================================================================ */
 	.contact_info{
@@ -245,7 +245,7 @@
 	}
 }
 @media (max-width:600px){
-	
+
 }
 @media (max-width:575px){
 	.top_menu {
@@ -290,7 +290,7 @@
 	}
 	/* End Elements Area css
 	============================================================================================ */
-	
+
 	/* Blog Page Area css
 	============================================================================================ */
 	.blog_details h2 {
@@ -347,7 +347,7 @@
 	}
 	/* End Main Menu Area css
 	============================================================================================ */
-	
+
 	/* Home Banner Area css
 	============================================================================================ */
     .home_banner_area .banner_inner .banner_content {
@@ -370,7 +370,7 @@
 	.comments-area .thumb {
 		margin-right: 10px;
 	}
-	
+
 	/* End Blog Page Area css
 	============================================================================================ */
 	.home_banner_area {

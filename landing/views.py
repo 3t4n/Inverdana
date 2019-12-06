@@ -9,3 +9,9 @@ def home(request):
 
 def inverdana_site(request):
     return render(request, 'blog.html')
+
+def docs(request):
+    return render(request, 'documentation.html')
+
+def api(request):
+    return render(request, 'infoapi.html')
