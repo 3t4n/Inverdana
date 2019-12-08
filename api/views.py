@@ -13,20 +13,46 @@ from rest_framework import routers, serializers, viewsets, filters
 
 User = get_user_model()
 
+#User
 class UserViewSet(views.UserViewSet):
      def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = UserSerializer(instance)
         return Response(serializer.data)
 
+#Locations
 class WorldBorderViewSet(viewsets.ModelViewSet):
     queryset =  WorldBorder.WorldBorder.objects.all()
     serializer_class = WorldBorderSerializer
 
+#Trees
 class TreeViewSet(viewsets.ModelViewSet):
     queryset = Tree.Tree.objects.all()
     serializer_class = TreeSerializer
 
+#Christmas trees
+class PineSpecieViewSet(viewsets.ModelViewSet):
+    queryset = ChristmasTrees.PineSpecie.objects.all()
+    serializer_class = PineSpecieSerializer
+
+class PineStateViewSet(viewsets.ModelViewSet):
+    queryset = ChristmasTrees.PineState.objects.all()
+    serializer_class = PineStateSerializer
+
+class PineSizeViewSet(viewsets.ModelViewSet):
+    queryset = ChristmasTrees.PineSize.objects.all()
+    serializer_class = PineSizeSerializer
+
+class PineTreeViewSet(viewsets.ModelViewSet):
+    queryset = ChristmasTrees.PineTree.objects.all()
+    serializer_class = PineTreeSerializer
+
+class PineLoanViewSet(viewsets.ModelViewSet):
+    queryset = ChristmasTrees.PineLoan.objects.all()
+    serializer_class = PineLoanSerializer
+
+
+#Tree's states
 class StatesViewSet(viewsets.ModelViewSet):
     queryset = Tree.TreeState.objects.all()
     serializer_class = TreeState
@@ -35,14 +61,17 @@ class TreeStateViewSet(viewsets.ModelViewSet):
     queryset = Tree.HasState.objects.all()
     serializer_class = HasState
 
+#Tree's species
 class TreeSpecieViewSet(viewsets.ModelViewSet):
     queryset = Tree.TreeSpecie.objects.all()
     serializer_class = TreeSpecieSerializer
 
+#Qr's
 class QRcodeViewSet(viewsets.ModelViewSet):
     queryset = Identifier.QRcode.objects.all()
     serializer_class = QRcodeSerializer
 
+#Photos
 class PhotosViewSet(viewsets.ModelViewSet):
     queryset = Photo.Photo.objects.all()
     serializer_class = PhotosSerializer
@@ -52,6 +81,7 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.Event.objects.all()
     serializer_class = EventSerializer
 
+#Feed
 class FeedViewSet(viewsets.ModelViewSet):
     queryset = Feed.Post.objects.all()
     serializer_class = FeedSerializer
@@ -61,6 +91,7 @@ class FeedViewSet(viewsets.ModelViewSet):
         'dateCreated': 'dateCreated',
     }
 
+#Suggestions
 class SuggestionsViewSet(viewsets.ModelViewSet):
     queryset = Suggestions.Suggestion.objects.all()
     serializer_class = SuggestionSerializer
@@ -71,6 +102,7 @@ class SuggestionsViewSet(viewsets.ModelViewSet):
 
 
 #class SharesViewSet(FiltersMixin,viewsets.ModelViewSet):
+#Shares
 class SharesViewSet(viewsets.ModelViewSet):
 
     queryset = Tree.Share.objects.all()

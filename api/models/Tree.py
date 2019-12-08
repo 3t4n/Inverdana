@@ -24,7 +24,6 @@ class TreeTip(models.Model):
         verbose_name_plural = "Tips de árboles"
         verbose_name="tip"
 
-
 class TreeState(models.Model):
     name = models.CharField(max_length=100, blank=False)
     class Meta:
@@ -32,7 +31,6 @@ class TreeState(models.Model):
         verbose_name="estado"
     def __str__(self):
         return '%s' % (self.name)
-
 
 class Tree(models.Model):
     specie_id = models.ForeignKey(TreeSpecie, on_delete=models.SET_NULL, null=True, verbose_name="Especie")
@@ -69,7 +67,6 @@ class HasState(models.Model):
     def __str__(self):
         return ' %s , Estado %s' % ( self.tree,self.state)
     #Photos
-
 
 class Share(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shares')

@@ -1,5 +1,5 @@
 from django.db.models.signals import pre_save,post_init
-from . import Contact,WorldBorder,Preference,GeoEntity,Tree,Photo,Identifier,Stock
+from . import Contact,WorldBorder,Preference,GeoEntity,Tree,Photo,Identifier,Stock,ChristmasTrees
 from users.models import *
 from django.utils.crypto import get_random_string
 from django.conf import settings as appsettings
