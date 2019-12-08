@@ -35,7 +35,7 @@ router.register(r'states', StatesViewSet)
 
 
 urlpatterns = [
-    #Ejemplo
+    #Ejemplo usuarios
     path('users/', views.UserViewSet.as_view({
     'get': 'list',
     'post': 'create',
@@ -43,33 +43,44 @@ urlpatterns = [
     'put': 'update',
     'patch': 'partial_update'
     })),
+    #Reportes
     path('reports/', TreeStateViewSet.as_view({
     'get': 'list',
     'post': 'create',
     })),
-    ##path('events/', EventViewSet.as_view({'get':'list'}))
-    ##,
+    #Mi usuario actual
     path('users/me/', UserViewSet.as_view({
     'get': 'me',
     'delete': 'me',
     'put': 'me',
     'patch': 'me'
     })),
+    #Mi contraseña actual
     path('users/me/password', UserViewSet.as_view({
     'post': 'set_password',
     })),
+    #Sugerencias
     path('suggestions/', SuggestionsViewSet.as_view({
     'get': 'list',
     'post': 'create'
     })),
+    #Prestamos de arboles de navidad
+    path('christmas/', PineLoanViewSet.as_view({
+        'get': 'list',
+        'post': 'create'
+    })),
+    #Noticias
     path('feed/', FeedViewSet.as_view({
     'get': 'list',
     'post': 'create'
     })),
+    #Reset password
     path('users/reset_password/', UserViewSet.as_view({
         'post':'reset_password'
         })),
+    #Admin Login
     path('auth/login/', views.TokenCreateView.as_view()),
+    #Logout
     path('auth/logout/', views.TokenDestroyView.as_view()),
 #    url(r'^auth/', include('djoser.urls')),
 #    url(r'^auth/', include('djoser.urls.jwt')),

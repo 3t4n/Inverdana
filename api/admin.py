@@ -46,3 +46,12 @@ admin.register(Stock.Stock)
 admin.register(Organization.Organization)
 admin.register(Clan.Clan)
 admin.register(Clan.MemberShip)
+admin.register(ChristmasTrees.PineSize)
+admin.register(ChristmasTrees.PineSpecie)
+admin.register(ChristmasTrees.PineTree)
+admin.register(ChristmasTrees.PineState)
+admin.register(ChristmasTrees.PineLoan)
+
+
+
+

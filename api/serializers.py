@@ -5,143 +5,211 @@ from django.db import IntegrityError, transaction
 from rest_framework import exceptions, serializers
 from rest_framework.exceptions import ValidationError
 from djoser import utils
-from  djoser.serializers import UserCreateSerializer
+from djoser.serializers import UserCreateSerializer
 from djoser.compat import get_user_email, get_user_email_field_name
 from djoser.conf import settings
 from drf_extra_fields.fields import Base64ImageField
-
-from api.models import Event
 from .models import *
 from users.models import *
 
 ##Get the current User Class defined in setting.py
 User = get_user_model()
 
+
+#Qr
 class QRcodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Identifier.QRcode
-        fields = ['status',
-                'string',
-               # 'code',
-                'tree_id']
+        fields = ['status', 'string',
+                  #'code',
+                  'tree_id']
 
+
+#Preferences
 class PreferenceSerializer(serializers.ModelSerializer):
     class Meta:
-            model = Preference.Preference
-            fields = ['push_notifications_trees','push_notifications_events']
+        model = Preference.Preference
+        fields = ['push_notifications_trees', 'push_notifications_events']
 
+
+#Places
 class WorldBorderSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorldBorder.WorldBorder
-        fields = ['iso2','name']
+        fields = ['iso2', 'name']
 
+
+#User's info
 class ContactSerializer(serializers.ModelSerializer):
     photo = Base64ImageField()
+
     class Meta:
         model = Contact.Contact
-        fields = ['cellphone','country','birthday','photo']
+        fields = ['cellphone', 'country', 'birthday', 'photo']
 
+
+#Trees
 class TreeTipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tree.TreeTip
-        fields = ['title','tip']
+        fields = ['title', 'tip']
 
 
 class TreeSpecieSerializer(serializers.ModelSerializer):
-    tips = TreeTipSerializer(many=True,read_only=True)
+    tips = TreeTipSerializer(many=True, read_only=True)
+
     class Meta:
         model = Tree.TreeSpecie
-        fields = ['id','commonname','tips']
+        fields = ['id', 'commonname', 'tips']
+
+
 class TreeState(serializers.ModelSerializer):
     class Meta:
         model = Tree.TreeState
-        fields = ['id','name']
+        fields = ['id', 'name']
+
 
 class TreeHasState(serializers.ModelSerializer):
     state = TreeState(many=False)
+
     class Meta:
         model = Tree.HasState
-        fields = ['dateCreated','state']
-#Pure 
+        fields = ['dateCreated', 'state']
+
+
 class HasState(serializers.ModelSerializer):
     state = TreeState(many=False)
     photo_thumbnail = serializers.ImageField(read_only=True)
     photo = Base64ImageField()
+
     class Meta:
         model = Tree.HasState
-        fields = ['state','tree','photo','photo_thumbnail','description']
-#
+        fields = ['state', 'tree', 'photo', 'photo_thumbnail', 'description']
+
+
 #Events
 class EventSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
     photo = Base64ImageField()
+
     class Meta:
         model = Event.Event
-        fields = ['name','info','photo_thumbnail','photo','initial_date']
+        fields = ['name', 'info', 'photo_thumbnail', 'photo', 'initial_date']
         use_natural_foreign_keys = True
         use_natural_primary_keys = True
+
 
 #Feed
 class FeedSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField(read_only=True)
-    username = serializers.CharField(source='user.username',read_only=True)
+    username = serializers.CharField(source='user.username', read_only=True)
     photo = Base64ImageField()
+
     class Meta:
         model = Feed.Post
-        fields = ['user','username','info','photo_thumbnail', 'photo','dateCreated']
+        fields = ['user', 'username', 'info', 'photo_thumbnail', 'photo', 'dateCreated']
+
 
 #Suggestions
 class SuggestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Suggestions.Suggestion
-        fields = ['title','description']
+        fields = ['title', 'description']
 
+
+#Photos
 class PhotoSerializer(serializers.ModelSerializer):
     photo_thumbnail = serializers.ImageField()
+
     class Meta:
         model = Photo.Photo
-        fields = ['id','photo','photo_thumbnail']
+        fields = ['id', 'photo', 'photo_thumbnail']
+
 
 class PhotosSerializer(serializers.ModelSerializer):
     photo = Base64ImageField()
+
     class Meta:
         model = Photo.Photo
-        fields = ['id','photo','tree_id']
+        fields = ['id', 'photo', 'tree_id']
 
+
+#Tree serializer
 class TreeSerializer(serializers.ModelSerializer):
-    photos = PhotoSerializer(many=True,required=False,read_only=True)
-   # specie_id = TreeSpecieSerializer(many=False,read_only=True)
-    states = TreeHasState(many=True,read_only=True)
-    specie = serializers.CharField(source='specie_id.commonname',read_only=True)
-    class Meta: 
-        model = Tree.Tree
-        fields = ['id','specie_id','name','age','identifiers','photos','point','x','y','states','specie']
+    photos = PhotoSerializer(many=True, required=False, read_only=True)
+#   specie_id = TreeSpecieSerializer(many=False,read_only=True)
+    states = TreeHasState(many=True, read_only=True)
+    specie = serializers.CharField(source='specie_id.commonname', read_only=True)
 
+    class Meta:
+        model = Tree.Tree
+        fields = ['id', 'specie_id', 'name', 'age', 'identifiers', 'photos', 'point', 'x', 'y', 'states', 'specie']
+
+
+#Christmas Pines
+class PineSpecieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChristmasTrees.PineSpecie
+        fields = ['specie_id', 'sciname']
+
+
+class PineStateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChristmasTrees.PineState
+        fields = ['name']
+
+
+class PineSizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChristmasTrees.PineSize
+        fields = ['size']
+
+
+class PineTreeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChristmasTrees.PineTree
+        fields = ['specie_id', 'state', 'size']
+
+
+class PineLoanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChristmasTrees.PineLoan
+        fields = ['user_id', 'tree_id', 'location', 'price']
+
+
+#Trees related to users
 class ShareSerializer(serializers.ModelSerializer):
-    tree = TreeSerializer(many=False,read_only=True)
+    tree = TreeSerializer(many=False, read_only=True)
     tree_id = serializers.IntegerField(source='tree.id')
+
     class Meta:
         model = Tree.Share
-        fields = ['user_id','id','dateCreated','dateModified','percentage','owner','tree_id','tree']
+        fields = ['user_id', 'id', 'dateCreated', 'dateModified', 'percentage', 'owner', 'tree_id', 'tree']
+
     def create(self, validated_data):
         print(validated_data)
         tree = Tree.Tree.objects.get(pk=validated_data.pop('tree')['id'])
-        instance =  Tree.Share.objects.create(tree=tree,**validated_data)
+        instance = Tree.Share.objects.create(tree=tree,**validated_data)
         return instance
 
+
+#Clans
 class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clan.MemberShip
-        fields = ['clan_id','date_joined']
+        fields = ['clan_id', 'date_joined']
 
+
+#Users
 class UserSerializer(serializers.ModelSerializer):
     preferences = PreferenceSerializer()
     info = ContactSerializer()
     shares = ShareSerializer(many=True)
     clans = MembershipSerializer(many=True)
+
     class Meta:
         model = User
-        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id','username','info','preferences','shares','first_name','last_name','clans'])
+        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id', 'username', 'info', 'preferences', 'shares', 'first_name', 'last_name', 'clans'])
         read_only_fields = (settings.LOGIN_FIELD,)
 
     def update(self, instance, validated_data):
@@ -153,8 +221,10 @@ class UserSerializer(serializers.ModelSerializer):
                 instance.save(update_fields=["is_active"])
         return super().update(instance, validated_data)
 
+
 class UserCreateSerializerCustomFields(UserCreateSerializer):
     info = ContactSerializer(read_only=False)
+
     class Meta:
         model = User
         fields = tuple(User.REQUIRED_FIELDS) + (
@@ -165,6 +235,7 @@ class UserCreateSerializerCustomFields(UserCreateSerializer):
             'last_name',
             'info',
         )
+
     def create(self, validated_data):
         try:
             user = self.perform_create(validated_data)
