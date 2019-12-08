@@ -22,7 +22,7 @@ class AchievementCatalog(models.Model):
 
 class Achievement(models.Model):
     dateCreated = models.DateField(auto_now_add=True)
-    user_id  = models.ForeignKey(User, on_delete=models.CASCADE, related_name='achievements',verbose_name="Usuario")
+    user_id  = models.ForeignKey(User, on_delete=models.CASCADE, related_name='achievements',verbose_name="Logros")
     achievement_id = models.ForeignKey(AchievementCatalog, on_delete=models.CASCADE, related_name='nameA',verbose_name="Logro")
     
     class Meta:

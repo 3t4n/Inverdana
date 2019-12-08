@@ -15,6 +15,33 @@ from users.models import *
 ##Get the current User Class defined in setting.py
 User = get_user_model()
 
+#Token
+class PushTokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Push.PushToken
+        fields = ['id','user_id','token']
+    def create(self, validated_data):
+        token = Push.PushToken.objects.filter(token=validated_data['token'])
+        print(token)
+        if token:
+            instance = Push.PushToken.objects.get(token=validated_data['token'])
+        else:
+            instance =  Push.PushToken.objects.create(**validated_data)
+        return instance
+
+#Achievement 
+class AchievementCatalogSerializer(serializers.ModelSerializer):
+    photo_thumbnail = serializers.ImageField(read_only=True)
+    class Meta:
+        model = Achievement.AchievementCatalog
+        fields = ['name','desc','photo_thumbnail']
+
+
+class AchievementSerializer(serializers.ModelSerializer):
+    achievement_id = AchievementCatalogSerializer()
+    class Meta:
+        model = Achievement.Achievement
+        fields = ['dateCreated','achievement_id']
 
 #Qr
 class QRcodeSerializer(serializers.ModelSerializer):
@@ -78,7 +105,7 @@ class TreeHasState(serializers.ModelSerializer):
 
 
 class HasState(serializers.ModelSerializer):
-    state = TreeState(many=False)
+    state = TreeState(many=False,read_only=True )
     photo_thumbnail = serializers.ImageField(read_only=True)
     photo = Base64ImageField()
 
@@ -188,6 +215,11 @@ class ShareSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         print(validated_data)
+        trees = Tree.Share.objects.filter(user_id=validated_data['user_id']).count()
+        if trees == 0:
+            achievement =  Achievement.AchievementCatalog.objects.get(pk=1)
+            Achievement.Achievement.objects.create(user_id=validated_data['user_id'],achievement_id=achievement)
+        print(trees)
         tree = Tree.Tree.objects.get(pk=validated_data.pop('tree')['id'])
         instance = Tree.Share.objects.create(tree=tree,**validated_data)
         return instance
@@ -206,10 +238,10 @@ class UserSerializer(serializers.ModelSerializer):
     info = ContactSerializer()
     shares = ShareSerializer(many=True)
     clans = MembershipSerializer(many=True)
-
+    achievements = AchievementSerializer(many=True)
     class Meta:
         model = User
-        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id', 'username', 'info', 'preferences', 'shares', 'first_name', 'last_name', 'clans'])
+        fields = tuple(User.REQUIRED_FIELDS) + tuple(['id', 'username', 'info', 'preferences', 'shares','achievements', 'first_name', 'last_name', 'clans'])
         read_only_fields = (settings.LOGIN_FIELD,)
 
     def update(self, instance, validated_data):

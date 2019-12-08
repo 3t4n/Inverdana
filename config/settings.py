@@ -108,7 +108,7 @@ DJOSER = {
 DATABASES = {
         'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'hot-fix',
+        'NAME': 'production',
         'USER': 'doadmin',
         'PASSWORD': 'fiwa4olc95p3kd8g',
         'HOST': 'dev-inverdana-db-do-user-6572351-0.db.ondigitalocean.com',

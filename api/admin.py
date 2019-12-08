@@ -5,7 +5,7 @@ from .models import *
 from users.models import *
 from django.contrib.auth.models import *
 from .modeladmins import *
-
+from  rest_framework.authtoken.models import Token
 class AdminSite(AdminSite):
     site_header = 'Inverdana'
     login_template ='admin/login.html'
@@ -51,7 +51,7 @@ admin.register(ChristmasTrees.PineSpecie)
 admin.register(ChristmasTrees.PineTree)
 admin.register(ChristmasTrees.PineState)
 admin.register(ChristmasTrees.PineLoan)
-
-
+admin.register(Token)
+admin.register(Push.PushToken)
 
 

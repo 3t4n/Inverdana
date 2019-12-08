@@ -1,5 +1,5 @@
 from django.db.models.signals import pre_save,post_init
-from . import Contact,WorldBorder,Preference,GeoEntity,Tree,Photo,Identifier,Stock,ChristmasTrees
+from . import Contact,WorldBorder,Preference,GeoEntity,Tree,Photo,Identifier,Stock,ChristmasTrees,Push
 from users.models import *
 from django.utils.crypto import get_random_string
 from django.conf import settings as appsettings
@@ -24,8 +24,6 @@ def QRcode_receiver(sender, instance, *args, **kwargs):
 def Suggestions_receiver(sender,instance,*args,**kwargs):
     if not instance.seen:
         if instance.id:
-            instance.seen = True
-            print("lol")
             instance.seen = True
             instance.save(force_update=True)
         

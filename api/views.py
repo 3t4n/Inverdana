@@ -12,6 +12,10 @@ from rest_framework import routers, serializers, viewsets, filters
 #from filters.mixins import (FiltersMixin,)
 
 User = get_user_model()
+#Token
+class PushTokensViewSet(viewsets.ModelViewSet):
+    queryset =  Push.PushToken.objects.all()
+    serializer_class = PushTokenSerializer
 
 #User
 class UserViewSet(views.UserViewSet):
@@ -112,6 +116,11 @@ class SharesViewSet(viewsets.ModelViewSet):
         'id': 'id',
         'tree_id': 'tree_id',
     }
+
+
+class AchievementsViewSet(viewsets.ModelViewSet):
+    queryset = Achievement.Achievement.objects.all()
+    serializer_class = AchievementSerializer
 
 def login(request):
     return render(request, 'login.html')
