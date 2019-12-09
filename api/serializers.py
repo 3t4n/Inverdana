@@ -222,10 +222,9 @@ class ShareSerializer(serializers.ModelSerializer):
             Achievement.Achievement.objects.create(user_id=validated_data['user_id'],achievement_id=achievement)
             token = Push.PushToken.objects.get(user_id=validated_data['user_id']).token
             data = {'to':token, 'title':"Nuevo Logro:"+achievement.name, 'body':achievement.desc}
-            print(data)
-            print(token)
+            data2 = {'to':token, 'title':"Recuerda regar tu nuevo árbol cada semana", 'body':'Dependerá de la especie'}
             requests.post(url = "https://exp.host/--/api/v2/push/send", data = data) 
-        print(trees)
+            requests.post(url = "https://exp.host/--/api/v2/push/send", data = data2) 
         tree = Tree.Tree.objects.get(pk=validated_data.pop('tree')['id'])
         instance = Tree.Share.objects.create(tree=tree,**validated_data)
         return instance
