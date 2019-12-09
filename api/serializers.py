@@ -11,7 +11,7 @@ from djoser.conf import settings
 from drf_extra_fields.fields import Base64ImageField
 from .models import *
 from users.models import *
-
+import requests 
 ##Get the current User Class defined in setting.py
 User = get_user_model()
 
@@ -216,9 +216,15 @@ class ShareSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         print(validated_data)
         trees = Tree.Share.objects.filter(user_id=validated_data['user_id']).count()
+        print(trees)
         if trees == 0:
-            achievement =  Achievement.AchievementCatalog.objects.get(pk=1)
+            achievement =  Achievement.AchievementCatalog.objects.get(name="Sembrador 1")
             Achievement.Achievement.objects.create(user_id=validated_data['user_id'],achievement_id=achievement)
+            token = Push.PushToken.objects.get(user_id=validated_data['user_id']).token
+            data = {'to':token, 'title':"Nuevo Logro:"+achievement.name, 'body':achievement.desc}
+            print(data)
+            print(token)
+            requests.post(url = "https://exp.host/--/api/v2/push/send", data = data) 
         print(trees)
         tree = Tree.Tree.objects.get(pk=validated_data.pop('tree')['id'])
         instance = Tree.Share.objects.create(tree=tree,**validated_data)
